@@ -1,0 +1,9 @@
+.app-header {
+  background-color: var(--app-header-bg-color);
+  &__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 30px;
+    padding-bottom: 25px;
+  }
+}

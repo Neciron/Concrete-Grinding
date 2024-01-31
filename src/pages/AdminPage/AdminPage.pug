@@ -1,0 +1,16 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title AdminPage
+    include @/includes/CriticalHeadPart.pug
+    link(href=require('@/scss/components/AppSpinner.scss') rel='stylesheet')
+    link(href=require('@/scss/components/AppHeader.scss') rel='stylesheet')
+    script(src=require('index.ts') defer='defer')
+  body 
+    include @/components/AppSpinner.pug
+    include @/components/AppHeader.pug
+    <i class="fa-regular fa-user"></i>
+
+    
