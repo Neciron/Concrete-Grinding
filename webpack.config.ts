@@ -20,18 +20,17 @@ export default (env: EnvironmentOptions): webpack.Configuration => {
     mode,
     entry: {
       'index': './src/pages/HomePage/HomePage.pug',
-      'about': './src/pages/AboutPage/AboutPage.pug',
-      'reviews': './src/pages/ReviewsPage/ReviewsPage.pug',
+      'about/index': './src/pages/AboutPage/AboutPage.pug',
+      'reviews/index': './src/pages/ReviewsPage/ReviewsPage.pug',
       'admin/applications/index': './src/pages/AdminApplicationsPage/AdminApplicationsPage.pug',
       'admin/content/index': './src/pages/AdminContentPage/AdminContentPage.pug',
       'admin/index': './src/pages/AdminPage/AdminPage.pug',
       'admin/reviews/index': './src/pages/AdminReviewsPage/AdminReviewsPage.pug',
       'admin/users/index': './src/pages/AdminUsersPage/AdminUsersPage.pug',
     },
-    // output: {
-    //   path: path.resolve(__dirname, "dist"),
-    //   filename: "script.js",
-    // },
+    output: {
+      path: path.resolve(__dirname, "dist"),
+    },
     devServer: !devServer ? undefined : {
       allowedHosts: 'all',
       headers: {
