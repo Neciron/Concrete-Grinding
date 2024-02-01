@@ -7,9 +7,9 @@
     "node": ">=20.0.0"
   },
   "scripts": {
-    "dev": "webpack",
+    "dev": "webpack --mode=development",
     "serve": "webpack serve",
-    "prod": "webpack --env production"
+    "prod": "webpack --mode=production --progress"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,7 @@
     "@types/webpack": "^5.28.5",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.9.1",
+    "firebase": "^10.7.2",
     "pug": "^3.0.2",
     "pug-plugin": "^4.9.9",
     "sass": "^1.70.0",

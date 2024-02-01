@@ -7,10 +7,18 @@ html(lang="en")
     include @/includes/CriticalHeadPart.pug
     link(href=require('@/scss/components/AppSpinner.scss') rel='stylesheet')
     link(href=require('@/scss/components/AppHeader.scss') rel='stylesheet')
+    link(href=require('@/scss/components/AppFooter.scss') rel='stylesheet')
+    link(href=require('@/scss/components/AppButton.scss') rel='stylesheet')
+    link(href=require('@/scss/components/SignInForm.scss') rel='stylesheet')
+    link(href=require('@/scss/components/AppInput.scss') rel='stylesheet')
+    link(href=require('@/scss/pages/AdminPage.scss') rel='stylesheet')
     script(src=require('index.ts') defer='defer')
-  body 
+  body
     include @/components/AppSpinner.pug
-    include @/components/AppHeader.pug
-    <i class="fa-regular fa-user"></i>
+    div(class="wrapper")
+      include @/components/AppHeader.pug
+      main(class="admin-page")
+        include @/components/SignInForm.pug
+      include @/components/AppFooter.pug
 
     
