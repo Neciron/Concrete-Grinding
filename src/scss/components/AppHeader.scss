@@ -1,9 +1,24 @@
 .app-header {
+  flex-shrink: 0;
   background-color: var(--app-header-bg-color);
   &__inner {
     max-width: 1200px;
     margin: 0 auto;
-    padding-top: 30px;
-    padding-bottom: 25px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  &__logo {
+    margin-right: 16px;
+  }
+  &__title {
+    color: var(--app-header-title-color);
+    font-family: "Kanit", sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 35px;
   }
 }

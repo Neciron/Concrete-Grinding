@@ -1,0 +1,25 @@
+form(id="sign-in-form" class="sign-in-form")
+  h1(data-tr-text="app_admin_panel_sign_in" class="sign-in-form__title")
+  div(class="app-input mb-16")
+    label(data-tr-text="app_email_address" class="app-input__label")
+    input(
+      autocomplete="email"
+      class="app-input__input"
+      data-tr-placeholder="app_enter_email"
+      type="text"
+    )
+    span
+  div(class="app-input mb-45")
+    label(data-tr-text="app_password" class="app-input__label")
+    input(
+      autocomplete="current-password"
+      class="app-input__input"
+      data-tr-placeholder="app_enter_password"
+      type="password"
+    )
+    span
+  button(
+    class="app-button"
+    data-tr-text="app_action_sign_in"
+    type="submit"
+  )

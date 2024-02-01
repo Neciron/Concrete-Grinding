@@ -1,0 +1,22 @@
+.app-footer {
+  flex-shrink: 0;
+  background-color: var(--app-footer-bg-color);
+  color: var(--app-footer-text-color);
+  padding-top: 24px;
+  padding-bottom: 24px;
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  &__company-name {
+    font-family: 'Kanit', sans-serif;
+  }
+  &__link {
+    &:hover {
+      text-decoration: underline dotted;
+    }
+  }
+}

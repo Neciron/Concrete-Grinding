@@ -1,9 +1,9 @@
-import path from "path";
-import webpack from "webpack";
-import "webpack-dev-server";
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import type { Configuration } from 'webpack';
+import type { Configuration as DevServerConfiguration } from 'webpack-dev-server';
+import path from 'path';
 // @ts-expect-error
 import PugPlugin from 'pug-plugin';
-import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
 interface EnvironmentOptions {
   WEBPACK_SERVE?: boolean;
@@ -12,11 +12,26 @@ interface EnvironmentOptions {
   production?: boolean;
 }
 
-export default (env: EnvironmentOptions): webpack.Configuration => {
+const devServerConfig: DevServerConfiguration = {
+  static: {
+    directory: path.join(__dirname, 'dist'),
+  },
+  compress: true,
+  open: false,
+  liveReload: false,
+  watchFiles: {
+    paths: ['src/**/*.*'],
+    options: {
+      usePolling: true,
+    },
+  },
+};
+
+export default (env: EnvironmentOptions): Configuration => {
   const production = env.production ?? false;
-  const devServer = Boolean(env.WEBPACK_SERVE) || process.env.WEBPACK_DEV_SERVER === "true";
-  const mode = production ? "production" : "development";
-  const config: webpack.Configuration = {
+  const devServer = Boolean(env.WEBPACK_SERVE) || process.env.WEBPACK_DEV_SERVER === 'true';
+  const mode = production ? 'production' : 'development';
+  const config: Configuration = {
     mode,
     entry: {
       'index': './src/pages/HomePage/HomePage.pug',
@@ -29,32 +44,21 @@ export default (env: EnvironmentOptions): webpack.Configuration => {
       'admin/users/index': './src/pages/AdminUsersPage/AdminUsersPage.pug',
     },
     output: {
-      path: path.resolve(__dirname, "dist"),
+      path: path.resolve(__dirname, 'dist'),
+      publicPath: '/',
     },
-    devServer: !devServer ? undefined : {
-      allowedHosts: 'all',
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': '*',
-      },
-      host: 'localhost',
-      hot: true,
-      port: 5174,
-      client: {
-        overlay: true,
-        progress: true,
-      },
-      watchFiles: ['./src/scss/**/*.scss'],
-    },
+    devServer: devServer ? devServerConfig : undefined,
     resolve: {
       alias: {
-        "@": path.resolve(__dirname, "src"),
+        '@': path.resolve(__dirname, 'src'),
       },
-      extensions: [".tsx", ".ts", ".js", ".jsx"],
+      extensions: ['.tsx', '.ts', '.js', '.jsx'],
     },
     plugins: [
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       new PugPlugin({
-        pretty: true, // formatting HTML, useful for development mode
+        // formatting HTML, useful for development mode
+        pretty: true,
         js: {
           // output filename of extracted JS file from source script
           filename: 'js/[name].[contenthash:8].js',
@@ -63,26 +67,26 @@ export default (env: EnvironmentOptions): webpack.Configuration => {
           // output filename of extracted CSS file from source style
           filename: 'css/[name].[contenthash:8].css',
         },
-      }), // rendering of Pug files defined in Webpack entry
+      }),
       new CleanWebpackPlugin(),
     ],
     module: {
       rules: [
         {
           test: /\.[jt]sx?$/,
+          exclude: /node_modules/,
           use: [
             {
-              loader: "ts-loader",
+              loader: 'ts-loader',
               options: {
                 transpileOnly: true,
-                configFile: path.resolve(__dirname, "tsconfig.json"),
-                onlyCompileBundledFiles: true,
               },
             },
           ],
         },
         {
           test: /\.pug$/,
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access
           loader: PugPlugin.loader, 
         },
         // sass-loader
@@ -92,9 +96,9 @@ export default (env: EnvironmentOptions): webpack.Configuration => {
             // Creates `style` nodes from JS strings
             // "style-loader",
             // Translates CSS into CommonJS
-            "css-loader",
+            'css-loader',
             // Compiles Sass to CSS
-            "sass-loader",
+            'sass-loader',
           ],
         },
         {
