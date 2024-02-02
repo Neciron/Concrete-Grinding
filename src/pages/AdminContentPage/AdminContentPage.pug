@@ -3,6 +3,16 @@ html(lang="en")
   head
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    title AdminContentPage
-  body 
-    h1 AdminContentPage
+    include @/includes/CriticalHeadPart.pug
+    link(href=require('@/scss/pages/AdminContentPage.scss') rel='stylesheet')
+    script(src=require('index.ts') defer='defer')
+  body
+    include @/components/AppSpinner.pug
+    div(class="wrapper")
+      include @/components/AppHeader.pug
+      main(class="admin-content-page")
+        include @/components/AdminMenu.pug
+        div content
+      include @/components/AppFooter.pug
+
+    

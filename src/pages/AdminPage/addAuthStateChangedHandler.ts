@@ -6,6 +6,7 @@ import { Route } from '@/scripts/Route';
 import { RouteName } from '@/scripts/Route';
 import { signOut } from 'firebase/auth';
 import { toast } from '@/scripts/toast';
+import { UserRole } from '@/types';
 import { utils } from '@/scripts/utils'
 
 export const addAuthStateChangedHandler = (auth: Auth): void => {
@@ -16,7 +17,7 @@ export const addAuthStateChangedHandler = (auth: Auth): void => {
     if (!user) {
       return;
     }
-    checkUserRole(user).then((userHasValidRole) => {
+    checkUserRole(user, [UserRole.Admin, UserRole.Moderator]).then((userHasValidRole) => {
       console.log('userHasValidRole');
       console.log(userHasValidRole);
       if (!userHasValidRole) {

@@ -7,8 +7,9 @@ import { getDatabase } from 'firebase/database';
 import { ref } from 'firebase/database';
 import { toast } from '../toast';
 import type { User } from 'firebase/auth';
+import type { UserRole } from '@/types';
 
-export const checkUserRole = async (user: User): Promise<boolean> => {
+export const checkUserRole = async (user: User, roles: UserRole[]): Promise<boolean> => {
   const dbRef = ref(getDatabase());
   const snapshot = await get(child(dbRef, `${DBTable.Users}/${user.uid}`)).catch((error: FirebaseError) => {
     toast.error(`${error.code}: ${error.message}`);
@@ -27,5 +28,5 @@ export const checkUserRole = async (user: User): Promise<boolean> => {
   console.log('dbUser');
   console.log(dbUser);
 
-  return dbUser.role === 'admin' || dbUser.role === 'moderator';
+  return dbUser.role? roles.includes(dbUser.role) : false;
 }
