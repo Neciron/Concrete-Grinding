@@ -1,12 +1,14 @@
 :root {
-  --app-spinner-bg-color: #23356C;
+  --primary: #23356C;
+  --primary-dark: #1A264C;
+  --primary-light: #3A4A8C;
   --app-spinner-wrapper-color: #F2F5F7;
-  --app-header-bg-color: #23356C;
   --app-header-title-color: #FFFFFF;
   --app-footer-text-color: #FFFFFF;
-  --app-footer-bg-color: #23356C;
   --black: #2C333F;
   --gray: #F2F5F7;
   --white: #FEFFFE;
-  --input-focus-color: #23356C;
+  --success-color: #04E762;
+  --error-color: #EF626C;
+  --warning-color: #CB904D;
 }

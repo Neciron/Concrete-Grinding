@@ -1,11 +1,9 @@
 import { child } from 'firebase/database';
-import { DBTable } from './DBTable';
+import { DBTable } from './database/DBTable';
 import { get } from 'firebase/database';
 import { getDatabase } from 'firebase/database';
 import { ref } from 'firebase/database';
 import type { RouteEntity } from './Route';
-
-type Translations = Record<string, string>;
 
 const getTranslations = async (): Promise<Translations> => {
   const dbRef = ref(getDatabase());
@@ -52,6 +50,7 @@ const translate = (params: TranslateParams): void => {
 
 export const setTranslations = async (route: RouteEntity): Promise<void> => {
   const translations = await getTranslations();
+  window.translations = translations;
   document.title = translations[route.metaTitleKey] ?? '---';
   const textElements = document.querySelectorAll(`[${DataAttributeName.Text}]`);
   textElements.forEach((elm) =>  {

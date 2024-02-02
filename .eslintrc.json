@@ -46,14 +46,6 @@
         ]
       }
     ],
-    "import/no-unresolved": "off",
-    "no-console": "warn",
-    "semi-style": "off",
-    "semi": "off",
-    "max-len": "off",
-    "indent": "off",
-    "arrow-body-style": "off",
-    "no-ternary": "off",
     "@typescript-eslint/comma-dangle": [
       "error",
       {
@@ -67,12 +59,16 @@
         "functions": "always-multiline"
       }
     ],
+    "@typescript-eslint/prefer-for-of": "off",
+    "id-length": "off",
+    "no-plusplus": "off",
     "@typescript-eslint/naming-convention": "off",
     "@typescript-eslint/no-unused-vars": "warn",
     "@typescript-eslint/space-infix-ops": "off",
     "no-undefined": "warn",
     "@typescript-eslint/no-magic-numbers": "off",
     "function-call-argument-newline": "off",
+    "@typescript-eslint/dot-notation": "off",
     "class-methods-use-this": "warn",
     "sort-keys": "off",
     "comma-dangle": [
@@ -105,11 +101,14 @@
         "asyncArrow": "always"
       }
     ],
-    "@typescript-eslint/strict-boolean-expressions": "warn",
+    "@typescript-eslint/strict-boolean-expressions": "off",
+    "no-ternary": "off",
+    "no-console": "off",
+    "import/no-unresolved": "off",
     "@typescript-eslint/prefer-readonly-parameter-types": "off",
     "@typescript-eslint/no-unsafe-argument": "warn",
     "max-statements": "off",
-    "dot-notation": "warn",
+    "dot-notation": "off",
     "@typescript-eslint/promise-function-async": "warn",
     "newline-per-chained-call": "off",
     "promise/always-return": "off",

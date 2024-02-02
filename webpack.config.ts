@@ -19,6 +19,9 @@ const devServerConfig: DevServerConfiguration = {
   compress: true,
   open: false,
   liveReload: false,
+  client: {
+    overlay: false,
+  },
   watchFiles: {
     paths: ['src/**/*.*'],
     options: {

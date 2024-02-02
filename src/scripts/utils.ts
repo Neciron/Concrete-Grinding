@@ -1,11 +1,11 @@
 // import { onValue } from "firebase/database";
 import { child } from 'firebase/database';
-import { DBTable } from './DBTable';
+import { DBTable } from './database/DBTable';
 // import { set } from "firebase/database";
 import { get } from 'firebase/database';
 import { getDatabase } from 'firebase/database';
 import { ref } from 'firebase/database';
-import type { RouteName } from './Route';
+import type { RouteEntity } from './Route';
 
 const setAppSpinner = (isLoading: boolean): void => {
   const loader = document.querySelector('.app-spinner');
@@ -19,12 +19,12 @@ const setAppSpinner = (isLoading: boolean): void => {
   loader.classList.add('loaded');
 };
 
-const navigate = (pathName: RouteName, replace = false): void => {
+const navigate = (route: RouteEntity, replace = false): void => {
   if (replace) {
-    window.history.replaceState({}, '', pathName);
-    window.location.pathname = pathName;
+    window.history.replaceState({}, '', route.path);
+    window.location.pathname = route.path;
   } else {
-    window.location.pathname = pathName;
+    window.location.pathname = route.path;
   }
 }
 

@@ -1,33 +1,32 @@
+import '@/scripts/critical';
+
+import { addAuthStateChangedHandler } from './addAuthStateChangedHandler';
+import { addSignInFormHandler } from './addSignInFormHandler';
 import { firebaseConfig } from '@/scripts/dbConfig';
 import { getAuth } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import { Route } from '@/scripts/Route';
 import { RouteName } from '@/scripts/Route';
 import { setTranslations } from '@/scripts/setTranslations';
+import { toast } from '@/scripts/toast';
 import { utils } from '@/scripts/utils'
 
-const createFormSubmitHandler = (): void => {
-  const form = document.getElementById('sign-in-form') as HTMLFormElement;
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    console.log('submit');
-  })
-}
-
 const init = async (): Promise<void> => {
-  initializeApp(firebaseConfig);
-  const auth = getAuth();
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  addAuthStateChangedHandler(auth);
   const user = auth.currentUser;
   if (user) {
-    utils.navigate(RouteName.AdminReviews, true);
-  } else {
-    await setTranslations(Route[RouteName.Admin]);
-    createFormSubmitHandler();
-    utils.setAppSpinner(false);
+    utils.navigate(Route[RouteName.AdminReviews], true);
+    return;
   }
+  await setTranslations(Route[RouteName.Admin]);
+  addSignInFormHandler();
+  utils.setAppSpinner(false);
 }
 
 init().catch((error) => {
+  toast.error('An error during init occurred');
   console.error(error);
 });
 
@@ -36,16 +35,6 @@ init().catch((error) => {
 // ;
 
 
-
-// {
-//   "app_action_sign_in": "Увійти",
-//   "app_admin_panel_sign_in": "Вхід в панель адміністратора",
-//   "app_email_address": "Email адреса",
-//   "app_enter_email": "Введіть email",
-//   "app_enter_password": "Введіть пароль",
-//   "app_meta_title_sign_in": "Вхід в панель адміністратора",
-//   "app_password": "Пароль"
-// }
 
 // getTranslations();
 

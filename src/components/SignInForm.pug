@@ -6,18 +6,20 @@ form(id="sign-in-form" class="sign-in-form")
       autocomplete="email"
       class="app-input__input"
       data-tr-placeholder="app_enter_email"
+      name="email"
       type="text"
     )
-    span
+    span(class="app-input__error")
   div(class="app-input mb-45")
     label(data-tr-text="app_password" class="app-input__label")
     input(
       autocomplete="current-password"
       class="app-input__input"
       data-tr-placeholder="app_enter_password"
+      name="password"
       type="password"
     )
-    span
+    span(class="app-input__error")
   button(
     class="app-button"
     data-tr-text="app_action_sign_in"
