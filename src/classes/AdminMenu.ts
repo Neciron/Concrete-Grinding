@@ -1,9 +1,9 @@
 import { apiUserFirebase } from '@/api';
 import type { IAdminMenu } from '@/types';
 import type { IAdminMenuProps } from '@/types';
+import { navigate } from '@/router';
 import { RouteName } from '@/types';
-import { Routes } from '@/scripts/Routes';
-import { utils } from '@/scripts/utils';
+import { Routes } from '@/router';
 
 export class AdminMenu implements IAdminMenu {
   public readonly route;
@@ -52,7 +52,7 @@ export class AdminMenu implements IAdminMenu {
     }
     signOutButton.addEventListener('click', () => {
       apiUserFirebase.signOutFirebase().then(() => {
-        utils.navigate(Routes[RouteName.Admin]);
+        navigate(Routes[RouteName.Admin]);
       }).catch((error) => {
         console.error(error);
       });

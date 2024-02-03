@@ -1,3 +1,5 @@
+import { $t } from '../$t';
+
 const hasWhitSpacesRegexp = /\s/;
 const cyrillicRegex = /[а-яА-ЯЁё]/;
 const emailRegexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -6,7 +8,6 @@ const lowerCaseRegExp = /(?=.*[a-z])/;
 const upperCaseRegExp = /(?=.*[A-Z])/;
 const minOneNumericRegExp = /(?=.*[0-9])/;
 const onlyLowerCaseAndUnderscoreRegExp = /^[a-z_]+$/;
-const $t = (key: string): string => window.translations[key] ?? key;
 
 const required: ValidationRule = (values) => {
   const value = values[0]?.trim();

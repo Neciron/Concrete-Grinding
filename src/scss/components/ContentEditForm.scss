@@ -16,7 +16,8 @@
       background-color: transparent;
       font-size: 24px;
       display: none;
-      &:first-child {
+      &:first-child,
+      &:nth-child(2) {
         display: inline-block;
       }
       &:hover {
@@ -26,7 +27,8 @@
     &_edit {
       & > button {
         display: inline-block;
-        &:first-child {
+        &:first-child,
+        &:nth-child(2) {
           display: none;
         }
       }

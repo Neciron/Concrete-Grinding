@@ -1,10 +1,10 @@
-import { toast } from '../toast';
+import { show } from '@/utils';
 import { validateInput } from './validateInput';
 
 export const addInputHandler = (input: HTMLInputElement, rules: ValidationRule[]): void => {
   const errorSpan = input.parentElement?.querySelector('span');
   if (!errorSpan) {
-    toast.error('Error: Input does not have a sibling span element');
+    show.error('Інпут не має спорідненого span елементу!');
     return;
   }
   input.addEventListener('focus', () => {

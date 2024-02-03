@@ -63,6 +63,18 @@ export class TranslateManager implements ITranslateManager {
     return result;
   }
 
+  public async removeTranslation(key: string): Promise<boolean> {
+    const result = await apiTranslations.removeTranslation(key).catch(() => {
+      return false;
+    });
+    if (result) {
+      const translations = { ...this.translations };
+      delete translations.key;
+      window.translations = translations;
+    }
+    return result;
+  }
+
   private addWatcher(): void {
     const dbRef = ref(getDatabase());
     onValue(child(dbRef, 'translations'), (snapshot) => {

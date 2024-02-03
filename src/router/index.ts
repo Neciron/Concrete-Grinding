@@ -1,4 +1,5 @@
 import type { IRoutes } from '@/types';
+import type{ Route } from '@/types';
 import { RouteName } from '@/types';
 
 export const Routes: IRoutes = Object.freeze({
@@ -43,3 +44,12 @@ export const Routes: IRoutes = Object.freeze({
     path: '/reviews',
   },
 });
+
+export const navigate = (route: Route, replace = false): void => {
+  if (replace) {
+    window.history.replaceState({}, '', route.path);
+    window.location.pathname = route.path;
+  } else {
+    window.location.pathname = route.path;
+  }
+};

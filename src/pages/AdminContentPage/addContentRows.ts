@@ -1,8 +1,10 @@
+import { $t } from '@/scripts/$t';
 import { addInputHandler } from '@/scripts/validation';
 import { checkInput } from '@/scripts/validation';
 import { RouteName } from '@/types';
-import { Routes } from '@/scripts/Routes';
-import { toast } from '@/scripts/toast';
+import { Routes } from '@/router';
+import { show } from '@/utils';
+import { toast } from '@/components/toast';
 import { TranslateManager } from '@/classes/TranslateManager';
 import { validationRules } from '@/scripts/validation';
 
@@ -14,6 +16,7 @@ interface ContentFormElement extends HTMLFormElement {
 enum Attribute {
   Cancel = 'cancel',
   Edit = 'edit',
+  Remove = 'remove',
   Save = 'save',
 }
 
@@ -32,6 +35,25 @@ const onListClick = (event: Event): void => {
   const action = target.getAttribute('data-action') ?? target.parentElement?.getAttribute('data-action');
   const container = target.closest('.content-edit-form__buttons');
   if (!container) {
+    return;
+  }
+  if (action === Attribute.Remove) {
+    const form = target.closest('form') as ContentFormElement|null;
+    if (!form) {
+      return;
+    }
+    const translateManager = new TranslateManager({ translations: window.translations, route: Routes[RouteName.AdminContent] });
+    translateManager.removeTranslation(form.key.defaultValue).then((result) => {
+      if (result) {
+        const liElement = form.closest('li');
+        liElement?.remove();
+        toast.success($t('app_notification_translation_removed'));
+      } else {
+        show.error($t('app_application_error'));
+      }
+    }).catch((error) => {
+      show.error($t('app_application_error'));
+    });
     return;
   }
   if (action === Attribute.Edit) {
@@ -75,10 +97,10 @@ const onListClick = (event: Event): void => {
         form.value.readOnly = true;
         container.classList.remove('content-edit-form__buttons_edit');
       } else {
-        toast.error('Some error occurred. Please try again later.');
+        show.error($t('app_application_error'));
       }
     }).catch((error) => {
-      toast.error('Some error occurred. Please try again later.');
+      show.error($t('app_application_error'));
     });
   }
 };

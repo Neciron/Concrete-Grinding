@@ -48,7 +48,10 @@ const ToastProcessor = {
     }
     elem.style.transform = 'translateX(calc(100% + 20px))';
     setTimeout(() => {
-      document.body.removeChild(elem);
+      const elemStillExist = document.getElementById(id);
+      if (elemStillExist) {
+        document.body.removeChild(elemStillExist);
+      }
       this.toastsQueue.shift();
       const nextToast = this.toastsQueue[0];
       if (nextToast) {
