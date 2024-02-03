@@ -1,24 +1,24 @@
-aside(class="admin-menu") 
-  h2(class="admin-menu__heading") User Menu
+aside(id="admin-menu" class="admin-menu") 
+  h2(id="admin-menu-heading" class="admin-menu__heading") User Menu
   nav
     ul
-      li(class="admin-menu__list-item")
-        a(href="/admin/reviews")
-          i(class="admin-menu__list-item-icon fa-solid fa-comment")
+      li
+        a(href="/admin/reviews" class="admin-menu__item")
+          i(class="admin-menu__item-icon fa-solid fa-comment")
           span(data-tr-text="app_menu_reviews")
-      li(class="admin-menu__list-item")
-        a(href="/admin/users")
-          i(class="admin-menu__list-item-icon fa-solid fa-user-group")
+      li
+        a(href="/admin/users" class="admin-menu__item")
+          i(class="admin-menu__item-icon fa-solid fa-user-group")
           span(data-tr-text="app_menu_users")
-      li(class="admin-menu__list-item")
-        a(href="#")
-          i(class="admin-menu__list-item-icon fa-solid fa-file-import")
+      li
+        a(href="/admin/applications" class="admin-menu__item")
+          i(class="admin-menu__item-icon fa-solid fa-file-import")
           span(data-tr-text="app_menu_applications")
-      li(class="admin-menu__list-item")
-        a(href="/admin/content")
-          i(class="admin-menu__list-item-icon fa-solid fa-book")
+      li
+        a(href="/admin/content" class="admin-menu__item")
+          i(class="admin-menu__item-icon fa-solid fa-book")
           span(data-tr-text="app_menu_content")
-      li(class="admin-menu__list-item admin-menu__list-item_button")
-        button(id="sign-out-button")
-          i(class="admin-menu__list-item-icon fa-solid fa-sign-out")
+      li
+        button(id="sign-out-button" class="admin-menu__item admin-menu__item_button")
+          i(class="admin-menu__item-icon fa-solid fa-sign-out")
           span(data-tr-text="app_action_sign_out")

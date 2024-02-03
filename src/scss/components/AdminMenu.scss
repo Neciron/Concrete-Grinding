@@ -1,30 +1,26 @@
 .admin-menu {
   height: 100%;
-  min-width: 250px;
+  width: 250px;
   border-right: 1px solid var(--black);
   &__heading {
-    padding: 17px 55px;
+    word-break: break-all;
+    padding: 16px;
     font-size: 16px;
     font-weight: 400;
     background-color: var(--admin-menu-heading-bg);
     border-bottom: 1px solid var(--black);
   }
-  &__list-item {
+  &__item {
+    display: block;
     padding: 16px;
     &_button {
-      padding: 0;
-      & > button {
-        padding: 0;
-        background-color: transparent;
-        border: 0;
-        width: 100%;
-        display: inline-block;
-        padding: 16px;
-        text-align: left;
-        &:hover {
-          cursor: pointer;
-          background-color: var(--admin-menu-hover-bg);
-        }
+      background-color: transparent;
+      border: 0;
+      width: 100%;
+      text-align: left;
+      &:hover {
+        cursor: pointer;
+        background-color: var(--admin-menu-hover-bg);
       }
     }
     &:hover {
@@ -40,7 +36,7 @@
       }
     }
   }
-  &__list-item-icon {
+  &__item-icon {
     margin-right: 16px;
   }
 }

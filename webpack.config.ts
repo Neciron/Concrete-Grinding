@@ -16,6 +16,7 @@ const devServerConfig: DevServerConfiguration = {
   static: {
     directory: path.join(__dirname, 'dist'),
   },
+  host: 'localhost',
   compress: true,
   open: false,
   liveReload: false,

@@ -1,63 +1,45 @@
-import '@/scripts/critical';
-
-import type { Auth } from 'firebase/auth';
-import { checkUserRole } from '@/scripts/database';
-import { firebaseConfig } from '@/scripts/dbConfig';
-import type { FirebaseError } from 'firebase/app';
-import { getAuth } from '@firebase/auth';
-import { initializeApp } from '@firebase/app';
-import { onAuthStateChanged } from '@firebase/auth';
-import { Route } from '@/scripts/Route';
-import { RouteName } from '@/scripts/Route';
-import { setTranslations } from '@/scripts/setTranslations';
-import { signOut } from '@firebase/auth';
+import { addContentRows } from './addContentRows';
+import { AdminMenu } from '@/classes/AdminMenu';
+import { apiUserFirebase } from '@/api';
+import { apiUserInternal } from '@/api';
+import { RouteName } from '@/types';
+import { Routes } from '@/scripts/Routes';
 import { toast } from '@/scripts/toast';
-import { UserRole } from '@/types';
+import { TranslateManager } from '@/classes/TranslateManager';
 import { utils } from '@/scripts/utils';
 
-const addAuthStateChangedHandler = (auth: Auth): void => {
-  onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      return;
-    }
-    checkUserRole(user, [UserRole.Admin]).then((userHasValidRole) => {
-      if (!userHasValidRole) {
-        signOut(auth).catch((error: FirebaseError) => {
-          toast.error(`${error.code}: ${error.message}`);
-          console.error(error);
-          console.error('Error during sign out');
-        });
-        utils.navigate(Route[RouteName.Home], true);
-      }
-    }).catch((error) => {
-      console.error(error);
-    });
-  });
-}
-
-const init = async (): Promise<void> => {
-  utils.addSignOutHandler();
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  addAuthStateChangedHandler(auth);
-  const user = auth.currentUser;
-  if (user) {
-    const userHasValidRole = await checkUserRole(user, [UserRole.Admin]);
-    toast.warning('You are not authorized to access this page');
-    if (!userHasValidRole) {
-      signOut(auth).catch((error: FirebaseError) => {
-        toast.error(`${error.code}: ${error.message}`);
-        console.error(error);
-        console.error('Error during sign out');
-      });
-      utils.navigate(Route[RouteName.Home], true);
-    }
+const init = async (): Promise< void> => {
+  const userFirebase = await apiUserFirebase.getUser();
+  if (!userFirebase) {
+    utils.navigate(Routes[RouteName.Admin]);
+    return;
   }
-  await setTranslations(Route[RouteName.AdminContent]);
+  const userInternal = await apiUserInternal.getUser(userFirebase);
+  if (!userInternal) {
+    toast.warning('You are not authorized to access this page');
+    const signOutResult = await apiUserFirebase.signOutFirebase();
+    if (signOutResult) {
+      utils.navigate(Routes[RouteName.Home]);
+    } else {
+      toast.error('Some error occurred. Please try again later.');
+    }
+    return;
+  }
+  if (!userInternal.isAdmin) {
+    utils.navigate(Routes[RouteName.Reviews], true);
+    return;
+  }
+  const translateManager = new TranslateManager({ translations: {}, route: Routes[RouteName.AdminContent] });
+  await translateManager.init();
+  const menu = new AdminMenu({ userInternal, userFirebase, route: Routes[RouteName.AdminContent] });
+  menu.init();
+  const translations = translateManager.translations;
+  addContentRows(translations);
+  translateManager.translatePage();
   utils.setAppSpinner(false);
-}
+};
 
 init().catch((error) => {
-  toast.error('An error during init occurred');
   console.error(error);
+  toast.error('Some error occurred. Please try again later.');
 });

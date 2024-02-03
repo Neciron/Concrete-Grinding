@@ -25,9 +25,18 @@
     "@typescript-eslint"
   ],
   "rules": {
+    "object-curly-spacing": [
+      "error",
+      "always"
+    ],
+    "max-len": "off",
     "@typescript-eslint/object-curly-spacing": [
       "error",
       "always"
+    ],
+    "quotes": [
+      "error",
+      "single"
     ],
     "@typescript-eslint/quotes": [
       "error",
@@ -69,7 +78,7 @@
     "@typescript-eslint/no-magic-numbers": "off",
     "function-call-argument-newline": "off",
     "@typescript-eslint/dot-notation": "off",
-    "class-methods-use-this": "warn",
+    "@typescript-eslint/class-methods-use-this": "warn",
     "sort-keys": "off",
     "comma-dangle": [
       "error",
@@ -127,10 +136,14 @@
     "max-lines-per-function": "off",
     "@typescript-eslint/no-explicit-any": "warn",
     "@typescript-eslint/explicit-module-boundary-types": "off",
+    "indent": "off",
     "@typescript-eslint/indent": [
       "error",
       2
     ],
+    "class-methods-use-this": "off",
+    "arrow-body-style": "off",
+    "lines-between-class-members": "off",
     "object-curly-newline": "off",
     "max-lines": "off",
     "dot-location": "off",

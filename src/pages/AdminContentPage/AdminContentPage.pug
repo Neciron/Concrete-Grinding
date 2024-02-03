@@ -12,7 +12,13 @@ html(lang="en")
       include @/components/AppHeader.pug
       main(class="admin-content-page")
         include @/components/AdminMenu.pug
-        div content
+        div(class="admin-content-page__content")
+          h1(data-tr-text="app_menu_content" class="admin-content-page__title")
+          div(class="admin-content-page__button-add-wrapper")
+            button(id="admin-content-page-add-row" class="app-button" type="button")
+              i(class="fa-solid fa-plus")
+              span(data-tr-text="app_add")
+          ul(id="admin-content-page-list" class="admin-content-page__list")
+          template(id="admin-content-page-row-template")
+            include @/components/ContentEditForm.pug
       include @/components/AppFooter.pug
-
-    
