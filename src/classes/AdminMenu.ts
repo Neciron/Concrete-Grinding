@@ -4,6 +4,7 @@ import type { IAdminMenuProps } from '@/types';
 import { navigate } from '@/router';
 import { RouteName } from '@/types';
 import { Routes } from '@/router';
+import { show } from '@/utils';
 
 export class AdminMenu implements IAdminMenu {
   public readonly route;
@@ -51,8 +52,12 @@ export class AdminMenu implements IAdminMenu {
       return;
     }
     signOutButton.addEventListener('click', () => {
-      apiUserFirebase.signOutFirebase().then(() => {
-        navigate(Routes[RouteName.Admin]);
+      apiUserFirebase.signOutFirebase().then((result) => {
+        if (result) {
+          navigate(Routes[RouteName.Admin]);
+          return;
+        }
+        show.error('Помилка під час виходу з системи будь-ласка зверніться до адміністратора');
       }).catch((error) => {
         console.error(error);
       });
