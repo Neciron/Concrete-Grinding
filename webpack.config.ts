@@ -74,6 +74,7 @@ export default (env: EnvironmentOptions): Configuration => {
       }),
       new CleanWebpackPlugin(),
     ],
+    externals: ['firebase'],
     module: {
       rules: [
         {
@@ -91,7 +92,25 @@ export default (env: EnvironmentOptions): Configuration => {
         {
           test: /\.pug$/,
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access
-          loader: PugPlugin.loader, 
+          oneOf: [
+            // import Pug in JavaScript/TypeScript as template function
+            {
+              // match scripts where Pug is used
+              issuer: /\.(js|ts)$/,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+              loader: PugPlugin.loader,
+              options: {
+                // compile Pug into template function
+                method: 'compile',
+              },
+            },
+            // render Pug from Webpack entry into static HTML
+            {
+              // default method is 'render'
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+              loader: PugPlugin.loader,
+            },
+          ],
         },
         // sass-loader
         {

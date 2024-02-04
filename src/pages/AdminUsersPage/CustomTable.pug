@@ -1,0 +1,15 @@
+thead(class="data-table__head")
+  tr(class="data-table__head-row")
+    each header in tableHeaders
+      th(class="col" scope="col")= header.title
+tbody
+  each row in tableRows
+    tr(class="data-table__body-row")
+      td(class="p-t-t__col")= row.id
+      td(class="p-t-t__col")= row.firstName
+      td(class="p-t-t__col")= row.lastName
+      td(class="p-t-t__col")= row.role
+      td(class="p-t-t__col") Actions
+
+
+

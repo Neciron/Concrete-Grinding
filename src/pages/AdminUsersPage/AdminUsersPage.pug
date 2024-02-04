@@ -1,8 +1,20 @@
 doctype html
 html(lang="en")
   head
-    meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    title AdminUsersPage
-  body 
-    h1 AdminUsersPage
+    include @/includes/CriticalHeadPart.pug
+    link(href=require('@/scss/pages/AdminUsersPage.scss') rel='stylesheet')
+    script(src=require('index.ts') defer='defer')
+  body
+    include @/components/AppSpinner.pug
+    div(class="wrapper")
+      include @/components/AppHeader.pug
+      main(class="admin-users-page")
+        include @/components/AdminMenu.pug
+        div(class="admin-users-page__content")
+          h1(data-tr-text="app_menu_users" class="admin-users-page__title")
+          div(class="admin-users-page__button-add-wrapper")
+            button(id="admin-users-page-add-row" class="app-button" type="button")
+              i(class="fa-solid fa-plus")
+              span(data-tr-text="app_action_add")
+          table(class="p-t-t data-table")
+      include @/components/AppFooter.pug

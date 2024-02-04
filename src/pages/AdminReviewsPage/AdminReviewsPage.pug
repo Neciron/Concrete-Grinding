@@ -1,8 +1,7 @@
 doctype html
 html(lang="en")
   head
-    meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    title AdminReviewsPage
-  body 
-    h1 AdminReviewsPage
+    include @/includes/CriticalHeadPart.pug
+    link(href=require('@/scss/pages/AdminReviewsPage.scss') rel='stylesheet')
+    script(src=require('index.ts') defer='defer')
+  body
