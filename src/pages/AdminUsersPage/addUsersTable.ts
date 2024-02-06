@@ -1,7 +1,8 @@
 import { $t } from '@/scripts/$t';
 import { apiUserInternal } from '@/api';
-import getCustomTable from './CustomTable.pug';
+import getUsersDataTable from './UsersDataTable.pug';
 import type { UserInternal } from '@/classes/UserInternal';
+import { UserInternalRole } from '@/types';
 
 enum TableColumn {
   Actions = 'actions',
@@ -11,11 +12,17 @@ enum TableColumn {
   Role = 'role',
 }
 
+interface Row {
+  readonly value: string;
+  readonly dataTitle: string;
+}
+
 interface TableRow {
-  [TableColumn.FirstName]: string;
-  [TableColumn.Id]: string;
-  [TableColumn.LastName]: string;
-  [TableColumn.Role]: string;
+  [TableColumn.Actions]: Row;
+  [TableColumn.FirstName]: Row;
+  [TableColumn.Id]: Row;
+  [TableColumn.LastName]: Row;
+  [TableColumn.Role]: Row;
 }
 
 const getTableHeaders = (): readonly TableHeader[] => {
@@ -37,7 +44,7 @@ const getTableHeaders = (): readonly TableHeader[] => {
       key: TableColumn.Role,
     },
     {
-      title: '',
+      title: $t('app_action_add'),
       key: TableColumn.Actions,
     },
   ];
@@ -46,22 +53,41 @@ const getTableHeaders = (): readonly TableHeader[] => {
 const getTableRows = (users: readonly UserInternal[]): readonly TableRow[] => {
   return users.map((user) => {
     return {
-      [TableColumn.Id]: user.id,
-      [TableColumn.FirstName]: user.firstName,
-      [TableColumn.LastName]: user.lastName,
-      [TableColumn.Role]: user.role,
+      [TableColumn.Id]: {
+        dataTitle: $t('app_id'),
+        value: user.id,
+      },
+      [TableColumn.FirstName]: {
+        dataTitle: $t('app_first_name'),
+        value: user.firstName,
+      },
+      [TableColumn.LastName]: {
+        dataTitle: $t('app_last_name'),
+        value: user.lastName,
+      },
+      [TableColumn.Role]: {
+        dataTitle: $t('app_role'),
+        value: user.role === UserInternalRole.Admin ? $t('app_role_admin') : $t('app_role_moderator'),
+      },
+      [TableColumn.Actions]: {
+        dataTitle: $t('app_edit'),
+        value: '',
+      },
     };
   });
 };
 
 export const addUsersTable = async (): Promise<void> => {
-  const table = document.querySelector('.data-table');
-  if (!table) {
+  const container = document.querySelector('.admin-users-page__content');
+  if (!container) {
     return;
   }
   const usersInternal = await apiUserInternal.getAllUsersInternal();
-  table.innerHTML = getCustomTable({
+  const template = document.createElement('template');
+  template.innerHTML = getUsersDataTable({
     tableHeaders: getTableHeaders(),
     tableRows: getTableRows(usersInternal),
   });
+  const templateContent = template.content;
+  container.appendChild(templateContent);
 };

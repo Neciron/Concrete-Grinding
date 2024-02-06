@@ -9,6 +9,9 @@
   font-weight: 700;
   text-transform: uppercase;
   border-radius: 8px;
+  & > i {
+    margin-right: 8px;
+  }
   &:hover {
     background-color: var(--primary-dark);
     cursor: pointer;
@@ -17,5 +20,17 @@
     background-color: var(--primary-light);
     color: var(--white);
     cursor: not-allowed;
+  }
+  &_light {
+    background-color: var(--white);
+    color: var(--primary);
+    &:hover {
+      background-color: var(--dark-white);
+      color: var(--primary-dark);
+    }
+    &:disabled {
+      background-color: var(--dark-white);
+      color: var(--primary-light);
+    }
   }
 }

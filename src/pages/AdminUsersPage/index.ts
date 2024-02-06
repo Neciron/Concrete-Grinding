@@ -1,5 +1,6 @@
 import { $t } from '@/scripts/$t';
 import { addUsersTable } from './addUsersTable';
+import { addUsersTableActionsHandlers } from './addUsersTableActionsHandlers';
 import { AdminMenu } from '@/classes/AdminMenu';
 import { apiUserFirebase } from '@/api';
 import { apiUserInternal } from '@/api';
@@ -35,9 +36,10 @@ const init = async (): Promise< void> => {
   }
   const menu = new AdminMenu({ userInternal, userFirebase, route: Routes[RouteName.AdminUsers] });
   menu.init();
-  addUsersTable().catch(() => {
+  await addUsersTable().catch(() => {
     show.error($t('app_application_error'));
   });
+  addUsersTableActionsHandlers();
   translateManager.translatePage();
   appSpinner.hide();
 };

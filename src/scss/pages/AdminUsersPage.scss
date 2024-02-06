@@ -5,6 +5,8 @@
 @import "../components/AppButton.scss";
 @import "../components/Toast.scss";
 @import "../components/AdminMenu.scss";
+@import "../components/DataTable.scss";
+@import "../components/Popup.scss";
 
 .admin-users-page {
   flex-shrink: 0;
@@ -15,22 +17,11 @@
     flex-grow: 2;
     height: 100%;
     overflow: auto;
+    padding: 0 20px;
   }
   &__title {
     text-align: center;
     margin-top: 32px;
     margin-bottom: 32px;
-  }
-  &__button-add-wrapper {
-    padding: 0 20px;
-    margin-bottom: 16px;
-    text-align: right;
-    & > button {
-      padding: 8px 16px;
-      & > i {
-        margin-right: 10px;
-      }
-      width: auto;
-    }
   }
 }

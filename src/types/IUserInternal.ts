@@ -14,6 +14,7 @@ export const getUserInternalRoleFromValue = (value: string | undefined): UserInt
 
 export interface IUserInternalProps {
   readonly firstName: string;
+  readonly id: string;
   readonly lastName: string;
   readonly role: UserInternalRole;
 }

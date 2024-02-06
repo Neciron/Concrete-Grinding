@@ -57,7 +57,26 @@ const getAllUsersInternal = async (): Promise<readonly UserInternal[]> => {
   return usersInternal;
 };
 
+const getUserInternalById = async (userId: string): Promise<UserInternal|null> => {
+  const dbRef = ref(getDatabase());
+  const snapshot = await get(child(dbRef, `${TABLE_NAME}/${userId}`)).catch((error: FirebaseError) => {
+    toast.error(`${error.code}: ${error.message}`);
+    console.error(error);
+  });
+  if (!snapshot || !snapshot.exists()) {
+    return null;
+  }
+  const dbUser = snapshot.val() as UserInternalDtoGet;
+  return new UserInternal({
+    id: userId,
+    firstName: dbUser.first_name ?? 'Unknown',
+    lastName: dbUser.last_name ?? 'Unknown',
+    role: getUserInternalRoleFromValue(dbUser.role) ?? UserInternalRole.Unknown,
+  });
+};
+
 export const apiUserInternal = {
   getUser,
   getAllUsersInternal,
+  getUserInternalById,
 };

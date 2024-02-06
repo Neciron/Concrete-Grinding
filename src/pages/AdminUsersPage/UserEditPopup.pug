@@ -1,0 +1,34 @@
+div(class="popup popup_hidden")
+  form(class="popup__content popup__content_hidden")
+    h3= heading
+    div(class="app-input mb-16")
+      label(class="app-input__label")= firstNameLabelText
+      input(
+        autocomplete="off"
+        class="app-input__input"
+        placeholder=firstNameInputPlaceholder
+        value=user.firstName
+        name="first-name"
+        type="text"
+      )
+      span(class="app-input__error")
+    div(class="app-input mb-16")
+      label(class="app-input__label")= lastNameLabelText
+      input(
+        autocomplete="off"
+        class="app-input__input"
+        placeholder=lastNameInputPlaceholder
+        value=user.lastName
+        name="last-name"
+        type="text"
+      )
+      span(class="app-input__error")
+    div(class="app-select mb-16")
+      label(class="app-select__label")= roleLabelText
+      select(class="app-select__select" name="role")
+        option(value="" selected=user.role === '') --
+        each role in roles
+          option(value=role.value selected=role.value === user.role)= role.optionText
+      span(class="app-select__error")
+    button(class="app-button" type="submit")= buttonSaveText
+    button(class="app-button app-button_danger" type="button")= buttonCancelText
