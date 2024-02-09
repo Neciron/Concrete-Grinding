@@ -47,6 +47,7 @@ export default (env: EnvironmentOptions): Configuration => {
       'admin/reviews/index': './src/pages/AdminReviewsPage/AdminReviewsPage.pug',
       'admin/users/index': './src/pages/AdminUsersPage/AdminUsersPage.pug',
     },
+    devtool: 'inline-source-map',
     output: {
       path: path.resolve(__dirname, 'dist'),
       publicPath: '/',

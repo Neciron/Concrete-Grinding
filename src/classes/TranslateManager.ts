@@ -1,11 +1,12 @@
 import { apiTranslations } from '@/api';
 import { child } from '@firebase/database';
+import { firebaseConfig } from '@/database';
 import { getDatabase } from '@firebase/database';
+import { initializeApp } from '@firebase/app';
 import type { ITranslateManager } from '@/types';
 import type { ITranslateManagerProps } from '@/types';
 import { onValue } from '@firebase/database';
 import { ref } from '@firebase/database';
-
 enum AttributeName {
   FullYear = 'data-tr-full-year',
   Placeholder = 'data-tr-placeholder',
@@ -76,6 +77,7 @@ export class TranslateManager implements ITranslateManager {
   }
 
   private addWatcher(): void {
+    const app = initializeApp(firebaseConfig);
     const dbRef = ref(getDatabase());
     onValue(child(dbRef, 'translations'), (snapshot) => {
       const data = snapshot.val() as Translations;
