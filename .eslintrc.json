@@ -55,6 +55,8 @@
         ]
       }
     ],
+    "camelcase": "off",
+    "no-alert": "off",
     "@typescript-eslint/comma-dangle": [
       "error",
       {

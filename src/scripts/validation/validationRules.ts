@@ -8,6 +8,10 @@ const lowerCaseRegExp = /(?=.*[a-z])/;
 const upperCaseRegExp = /(?=.*[A-Z])/;
 const minOneNumericRegExp = /(?=.*[0-9])/;
 const onlyLowerCaseAndUnderscoreRegExp = /^[a-z_]+$/;
+const onlyNumbers = /^\d+$/;
+const onlyCyrillicSymbols = /^[а-яА-ЯІіЇїЄєҐґ]*$/;
+const cyrillicOrDigitsRegxEp = /^[а-яА-ЯІіЇїЄєҐґ0-9\s'-]+$/;
+
 
 const required: ValidationRule = (values) => {
   const value = values[0]?.trim();
@@ -127,6 +131,45 @@ const minOneUppercase: ValidationRule = (values) => {
   return null;
 };
 
+const phone: ValidationRule = (values) => {
+  const value = values[0]?.trim();
+  if (!value) {
+    return null;
+  }
+  if (!onlyNumbers.test(value)) {
+    return $t('app_validation_error_phone_only_digits');
+  }
+  if (value.length !== 10 && value.length !== 12) {
+    return $t('app_validation_error_phone_invalid_length');
+  }
+  return null;
+};
+
+const onlyCyrillic: ValidationRule = (values) => {
+  const value = values[0]?.trim();
+  if (!value) {
+    return null;
+  }
+  const isCyrillic = onlyCyrillicSymbols.test(value);
+  if (!isCyrillic) {
+    return $t('app_validation_error_only_cyrillic');
+  }
+  return null;
+};
+
+
+const onlyCyrillicOrDigits: ValidationRule = (values) => {
+  const value = values[0]?.trim();
+  if (!value) {
+    return null;
+  }
+  if (!cyrillicOrDigitsRegxEp.test(value)) {
+    return $t('app_validation_error_only_cyrillic_or_digits');
+  }
+  return null;
+};
+
+
 export const validationRules = {
   required,
   maxLength,
@@ -139,4 +182,7 @@ export const validationRules = {
   minOneLowercase,
   minOneUppercase,
   onlyLowerCaseAndUnderscore,
+  phone,
+  onlyCyrillic,
+  onlyCyrillicOrDigits,
 };
