@@ -3,7 +3,7 @@ html(lang="en")
   head
     include @/includes/CriticalHeadPart.pug
     link(href=require('@/scss/pages/AdminPage.scss') rel='stylesheet')
-    script(src=require('index.ts') defer='defer')
+    script(src=require('index.ts') defer)
   body
     include @/components/AppSpinner.pug
     div(class="wrapper")

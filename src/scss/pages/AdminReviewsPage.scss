@@ -1,3 +1,22 @@
-.application {
-  color: red;
+@import "../components/AppSpinner.scss";
+@import "../components/AppHeader.scss";
+@import "../components/AppFooter.scss";
+@import "../components/Toast.scss";
+@import "../components/AdminMenu.scss";
+
+.admin-reviews-page {
+  flex-shrink: 0;
+  flex-grow: 2;
+  display: flex;
+  align-items: flex-start;
+  &__content {
+    flex-grow: 2;
+    height: 100%;
+    overflow: auto;
+  }
+  &__title {
+    text-align: center;
+    margin-top: 32px;
+    margin-bottom: 32px;
+  }
 }
