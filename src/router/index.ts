@@ -23,10 +23,10 @@ export const Routes: IRoutes = Object.freeze({
     name: RouteName.AdminContent,
     path: '/admin/content',
   },
-  [RouteName.AdminReviews]: {
-    metaTitleKey: 'app_meta_title_reviews',
-    name: RouteName.AdminReviews,
-    path: '/admin/reviews',
+  [RouteName.AdminFeedbacks]: {
+    metaTitleKey: 'app_meta_title_feedbacks',
+    name: RouteName.AdminFeedbacks,
+    path: '/admin/feedbacks',
   },
   [RouteName.AdminUsers]: {
     metaTitleKey: 'app_meta_title_users',
@@ -38,10 +38,10 @@ export const Routes: IRoutes = Object.freeze({
     name: RouteName.Home,
     path: '/',
   },
-  [RouteName.Reviews]: {
-    metaTitleKey: 'app_meta_title_reviews',
-    name: RouteName.Reviews,
-    path: '/reviews',
+  [RouteName.Feedbacks]: {
+    metaTitleKey: 'app_meta_title_feedbacks',
+    name: RouteName.Feedbacks,
+    path: '/feedbacks',
   },
 });
 

@@ -23,7 +23,7 @@ const init = async (): Promise<void> => {
       }
       return;
     }
-    navigate(Routes[RouteName.AdminReviews], true);
+    navigate(Routes[RouteName.AdminFeedbacks], true);
     return;
   }
   const translateManager = new TranslateManager({ translations: {}, route: Routes[RouteName.Admin] });

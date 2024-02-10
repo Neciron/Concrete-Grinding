@@ -52,7 +52,7 @@ const onFormSubmit = (event: Event): void => {
   apiUserFirebase.signIn(form.email.value.trim(), form.password.value.trim()).then((result) => {
     if (result) {
       form.reset();
-      navigate(Routes[RouteName.AdminReviews]);
+      navigate(Routes[RouteName.AdminFeedbacks]);
     } else {
       toast.error($t('app_api_error_sign_in'));
     }

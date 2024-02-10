@@ -31,7 +31,7 @@ const init = async (): Promise< void> => {
     return;
   }
   if (!userInternal.isAdmin) {
-    navigate(Routes[RouteName.Reviews], true);
+    navigate(Routes[RouteName.AdminFeedbacks], true);
     return;
   }
   const menu = new AdminMenu({ userInternal, userFirebase, route: Routes[RouteName.AdminUsers] });

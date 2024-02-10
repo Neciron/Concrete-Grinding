@@ -15,7 +15,7 @@ const init = async (): Promise< void> => {
     navigate(Routes[RouteName.Admin]);
     return;
   }
-  const translateManager = new TranslateManager({ translations: {}, route: Routes[RouteName.AdminReviews] });
+  const translateManager = new TranslateManager({ translations: {}, route: Routes[RouteName.AdminFeedbacks] });
   await translateManager.init();
   const userInternal = await apiUserInternal.getUser(userFirebase);
   if (!userInternal) {
@@ -28,7 +28,7 @@ const init = async (): Promise< void> => {
     }
     return;
   }
-  const menu = new AdminMenu({ userInternal, userFirebase, route: Routes[RouteName.AdminReviews] });
+  const menu = new AdminMenu({ userInternal, userFirebase, route: Routes[RouteName.AdminFeedbacks] });
   menu.init();
   translateManager.translatePage();
   appSpinner.hide();

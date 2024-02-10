@@ -40,11 +40,11 @@ export default (env: EnvironmentOptions): Configuration => {
     entry: {
       'index': './src/pages/HomePage/HomePage.pug',
       'about/index': './src/pages/AboutPage/AboutPage.pug',
-      'reviews/index': './src/pages/ReviewsPage/ReviewsPage.pug',
+      'feedbacks/index': './src/pages/FeedbacksPage/FeedbacksPage.pug',
       'admin/applications/index': './src/pages/AdminApplicationsPage/AdminApplicationsPage.pug',
       'admin/content/index': './src/pages/AdminContentPage/AdminContentPage.pug',
       'admin/index': './src/pages/AdminPage/AdminPage.pug',
-      'admin/reviews/index': './src/pages/AdminReviewsPage/AdminReviewsPage.pug',
+      'admin/feedbacks/index': './src/pages/AdminFeedbacksPage/AdminFeedbacksPage.pug',
       'admin/users/index': './src/pages/AdminUsersPage/AdminUsersPage.pug',
     },
     devtool: 'inline-source-map',

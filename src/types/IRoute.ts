@@ -3,10 +3,10 @@ export enum RouteName {
   Admin = 'Admin',
   AdminApplications = 'AdminApplications',
   AdminContent = 'AdminContent',
-  AdminReviews = 'AdminReviews',
+  AdminFeedbacks = 'AdminFeedbacks',
   AdminUsers = 'AdminUsers',
   Home = 'Home',
-  Reviews = 'Reviews',
+  Feedbacks = 'Feedbacks',
 }
 
 export interface Route {
