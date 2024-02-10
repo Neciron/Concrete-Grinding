@@ -1,6 +1,7 @@
 export interface IPopupProps {
-  readonly renderedTemplate: DocumentFragment;
   onClose: () => void;
+  onConfirm: (event: Event) => void;
+  readonly renderedTemplate: DocumentFragment;
 }
 
 export interface IPopup extends IPopupProps {

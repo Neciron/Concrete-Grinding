@@ -1,6 +1,6 @@
 import { $t } from '@/scripts/$t';
-import { addUsersTable } from './addUsersTable';
-import { addUsersTableActionsHandlers } from './addUsersTableActionsHandlers';
+import { addUsersTable } from './usersDataTable';
+import { addUsersTableActionsHandlers } from './usersDataTable';
 import { AdminMenu } from '@/classes/AdminMenu';
 import { apiUserFirebase } from '@/api';
 import { apiUserInternal } from '@/api';

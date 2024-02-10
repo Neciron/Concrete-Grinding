@@ -11,7 +11,6 @@ const getUser = (): Promise<User|null> => {
   const auth = getAuth(app);
   return new Promise<User|null>((resolve) => {
     onAuthStateChanged(auth, (user) => {
-      console.log('user', user);
       resolve(user);
     });
   });

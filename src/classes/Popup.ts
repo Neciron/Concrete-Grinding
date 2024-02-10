@@ -3,12 +3,14 @@ import type { IPopupProps } from '@/types';
 import { show } from '@/utils';
 
 export class Popup implements IPopup {
-  public readonly renderedTemplate;
   public readonly onClose;
+  public readonly onConfirm;
+  public readonly renderedTemplate;
 
   public constructor(props: IPopupProps) {
-    this.renderedTemplate = props.renderedTemplate;
     this.onClose = props.onClose;
+    this.onConfirm = props.onConfirm;
+    this.renderedTemplate = props.renderedTemplate;
   }
 
   public show(): void {
@@ -26,6 +28,19 @@ export class Popup implements IPopup {
           this.hide();
         }
       });
+      const form = document.getElementById('popup-form');
+      if (form) {
+        form.addEventListener('submit', (event: Event) => {
+          event.preventDefault();
+          this.onConfirm(event);
+        });
+      }
+      const cancelButton = document.getElementById('popup-button-cancel');
+      if (cancelButton) {
+        cancelButton.addEventListener('click', () => {
+          this.hide();
+        });
+      }
       popup.classList.remove('popup_hidden');
       content.classList.remove('popup__content_hidden');
     }, 300);

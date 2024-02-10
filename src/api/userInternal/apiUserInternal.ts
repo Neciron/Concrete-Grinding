@@ -4,6 +4,8 @@ import { get } from '@firebase/database';
 import { getDatabase } from '@firebase/database';
 import { getUserInternalRoleFromValue } from '@/types';
 import { ref } from '@firebase/database';
+import { set } from '@firebase/database';
+import { show } from '@/utils';
 import { toast } from '@/components/toast';
 import type { User } from '@firebase/auth';
 import { UserInternal } from '@/classes/UserInternal';
@@ -75,8 +77,61 @@ const getUserInternalById = async (userId: string): Promise<UserInternal|null> =
   });
 };
 
+const saveUserInternal = async (user: UserInternal, isNewUser: boolean): Promise<UserInternal|null> => {
+  const dbRef = ref(getDatabase());
+  if (!isNewUser) {
+    const snapshot = await get(child(dbRef, `${TABLE_NAME}/${user.id}`)).catch((error: FirebaseError) => {
+      toast.error(`${error.code}: ${error.message}`);
+      console.error(error);
+    });
+    if (!snapshot || !snapshot.exists()) {
+      return null;
+    }
+  }
+  const result = await set(child(dbRef, `${TABLE_NAME}/${user.id}`), {
+    first_name: user.firstName,
+    last_name: user.lastName,
+    role: user.role,
+  }).catch((error: FirebaseError) => {
+    show.error(`Помилка збереження користувача! ${error.code}: ${error.message}`);
+    console.error();
+    return null;
+  });
+  if (result === null) {
+    return null;
+  }
+  return new UserInternal({
+    id: user.id,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    role: user.role,
+  });
+};
+
+const removeUserInternal = async (userId: string): Promise<boolean> => {
+  const dbRef = ref(getDatabase());
+  const snapshot = await get(child(dbRef, `${TABLE_NAME}/${userId}`)).catch((error: FirebaseError) => {
+    toast.error(`${error.code}: ${error.message}`);
+    console.error(error);
+  });
+  if (!snapshot || !snapshot.exists()) {
+    return false;
+  }
+  const result = await set(child(dbRef, `${TABLE_NAME}/${userId}`), {}).catch((error: FirebaseError) => {
+    show.error(`Помилка видалення користувача! ${error.code}: ${error.message}`);
+    console.error();
+    return null;
+  });
+  if (result === null) {
+    return false;
+  }
+  return true;
+};
+
 export const apiUserInternal = {
   getUser,
   getAllUsersInternal,
   getUserInternalById,
+  saveUserInternal,
+  removeUserInternal,
 };

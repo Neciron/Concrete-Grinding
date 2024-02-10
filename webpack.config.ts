@@ -19,7 +19,7 @@ const devServerConfig: DevServerConfiguration = {
   host: 'localhost',
   compress: true,
   open: false,
-  liveReload: false,
+  liveReload: true,
   client: {
     overlay: false,
   },

@@ -33,4 +33,13 @@
       color: var(--primary-light);
     }
   }
+  &_danger {
+    background-color: var(--danger);
+    &:hover {
+      background-color: var(--danger-dark);
+    }
+    &:disabled {
+      background-color: var(--danger-light);
+    }
+  }
 }

@@ -21,11 +21,12 @@ table(id="users-table" class="data-table")
         td(class="data-table__body-col" data-title=row.lastName.dataTitle)= row.lastName.value
         td(class="data-table__body-col" data-title=row.role.dataTitle)= row.role.value
         td(class="data-table__body-col data-table__body-col_actions")
-          button(
-            data-action="edit"
-            data-user-id=row.id.value
-            type="button"
-            class="data-table__action-button"
-            title=row.actions.dataTitle
-          )
-            i(class="fa-solid fa-pencil")
+          each action in row.actions
+            button(
+              data-action=action.value
+              data-user-id=row.id.value
+              type="button"
+              class="data-table__action-button"
+              title=action.dataTitle
+            )
+              i(class=action.icon)

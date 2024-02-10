@@ -1,8 +1,9 @@
 import { show } from '@/utils';
 import { validateInput } from './validateInput';
 
-export const checkInput = (input: HTMLInputElement, rules: ValidationRule[]): boolean => {
-  const errorSpan = input.parentElement?.querySelector('span');
+export const checkInput = (input: HTMLInputElement|HTMLSelectElement, rules: ValidationRule[]): boolean => {
+  const parent = input.closest('.app-select') ?? input.closest('.app-input');
+  const errorSpan = parent?.querySelector('span');
   if (!errorSpan) {
     show.error('Інпут не має спорідненого span елементу!');
     return false;
