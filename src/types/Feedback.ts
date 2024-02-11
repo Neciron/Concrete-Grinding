@@ -43,7 +43,7 @@ export interface FeedbackProps {
   readonly text: string;
   /** Example: 2024-02-11T10:00:36.984Z */
   readonly updatedAt: Date|null;
-  readonly updatedUserId: string|null;
+  readonly updatedByUserId: string|null;
 }
 
 export interface Feedback extends FeedbackProps {}

@@ -1,0 +1,34 @@
+table(id="feedbacks-table" class="data-table")
+  thead
+    tr(class="data-table__head-row")
+      each header in tableHeaders
+        if header.key === "actions"
+          th(class="data-table__head-col" scope="col")
+            button(
+              data-action="add"
+              class="app-button app-button_light"
+              type="button"
+            )
+              i(class="fa-solid fa-plus")
+              span= header.title
+        else
+          th(class="data-table__head-col" scope="col")= header.title
+  tbody
+    each row in tableRows
+      tr(class="data-table__body-row")
+        td(class="data-table__body-col" data-title=row.createdAt.dataTitle)= row.createdAt.value
+        td(class="data-table__body-col" data-title=row.status.dataTitle)= row.status.value
+        td(class="data-table__body-col" data-title=row.rating.dataTitle)= row.rating.value
+        td(class="data-table__body-col" data-title=row.customer.dataTitle)= row.customer.value
+        td(class="data-table__body-col" data-title=row.updatedAt.dataTitle)= row.updatedAt.value
+        td(class="data-table__body-col" data-title=row.updatedByUserId.dataTitle)= row.updatedByUserId.value
+        td(class="data-table__body-col data-table__body-col_actions")
+          each action in row.actions
+            button(
+              data-action=action.value
+              data-feedback-id=row.id.value
+              type="button"
+              class="data-table__action-button"
+              title=action.dataTitle
+            )
+              i(class=action.icon)

@@ -4,6 +4,9 @@
   align-items: center;
   justify-items: center;
   grid-gap: 16px;
+  @media screen and (max-width: 768px) {
+    grid-template-columns: auto;
+  }
   & > div {
     width: 100%;
   }

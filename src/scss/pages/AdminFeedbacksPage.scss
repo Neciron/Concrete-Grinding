@@ -3,6 +3,8 @@
 @import "../components/AppFooter.scss";
 @import "../components/Toast.scss";
 @import "../components/AdminMenu.scss";
+@import "../components/DataTable.scss";
+@import "../components/AppButton.scss";
 
 .admin-feedbacks-page {
   flex-shrink: 0;
@@ -13,6 +15,7 @@
     flex-grow: 2;
     height: 100%;
     overflow: auto;
+    padding: 0 20px;
   }
   &__title {
     text-align: center;

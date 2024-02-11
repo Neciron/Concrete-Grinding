@@ -59,7 +59,7 @@ const dtoGetToFeedback = (dto: FeedbackDtoGet): Feedback => {
     status,
     text: dto.text,
     updatedAt,
-    updatedUserId: dto.updated_by_user_id,
+    updatedByUserId: dto.updated_by_user_id,
   });
 };
 
@@ -97,7 +97,7 @@ const updateFeedback = async (feedback: Feedback): Promise<Feedback|null> => {
     status: feedback.status,
     text: feedback.text,
     updated_at: feedback.updatedAt?.toISOString() ?? null,
-    updated_by_user_id: feedback.updatedUserId ?? null,
+    updated_by_user_id: feedback.updatedByUserId ?? null,
   }).catch((error: FirebaseError) => {
     show.error(`Помилка збереження відгуку! ${error.code}: ${error.message}`);
     console.error();
@@ -123,7 +123,7 @@ const createFeedback = async (feedback: Feedback): Promise<Feedback|null> => {
     status: feedback.status,
     text: feedback.text,
     updated_at: feedback.updatedAt?.toISOString() ?? null,
-    updated_by_user_id: feedback.updatedUserId ?? null,
+    updated_by_user_id: feedback.updatedByUserId ?? null,
   }).catch((error: FirebaseError) => {
     show.error(`Помилка збереження відгуку! ${error.code}: ${error.message}`);
     console.error();

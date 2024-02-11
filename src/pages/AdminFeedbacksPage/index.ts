@@ -1,4 +1,6 @@
 import { $t } from '@/scripts/$t';
+import { addTable } from './feedbacksDataTable';
+import { addTableActionsHandlers } from './feedbacksDataTable';
 import { AdminMenu } from '@/classes/AdminMenu';
 import { apiUserFirebase } from '@/api';
 import { apiUserInternal } from '@/api';
@@ -30,6 +32,10 @@ const init = async (): Promise< void> => {
   }
   const menu = new AdminMenu({ userInternal, userFirebase, route: Routes[RouteName.AdminFeedbacks] });
   menu.init();
+  await addTable().catch(() => {
+    show.error($t('app_application_error'));
+  });
+  addTableActionsHandlers();
   translateManager.translatePage();
   appSpinner.hide();
 };

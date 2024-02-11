@@ -11,7 +11,7 @@ export class FeedbackImpl implements Feedback {
   public readonly status;
   public readonly text;
   public readonly updatedAt;
-  public readonly updatedUserId;
+  public readonly updatedByUserId;
 
   public constructor(props: FeedbackProps) {
     this.afterGrindingPhotoUrl = props.afterGrindingPhotoUrl;
@@ -23,7 +23,7 @@ export class FeedbackImpl implements Feedback {
     this.status = props.status;
     this.text = props.text;
     this.updatedAt = props.updatedAt;
-    this.updatedUserId = props.updatedUserId;
+    this.updatedByUserId = props.updatedByUserId;
   }
 
   public toString(): string {
