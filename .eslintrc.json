@@ -73,6 +73,7 @@
     "@typescript-eslint/prefer-for-of": "off",
     "id-length": "off",
     "no-plusplus": "off",
+    "@typescript-eslint/no-empty-interface": "warn",
     "@typescript-eslint/naming-convention": "off",
     "@typescript-eslint/no-unused-vars": "warn",
     "@typescript-eslint/space-infix-ops": "off",

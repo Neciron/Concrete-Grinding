@@ -1,3 +1,4 @@
+export * from './Feedback';
 export * from './IAdminMenu';
 export * from './IPopup';
 export * from './IPopupUser';
