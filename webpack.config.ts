@@ -66,11 +66,11 @@ export default (env: EnvironmentOptions): Configuration => {
         pretty: true,
         js: {
           // output filename of extracted JS file from source script
-          filename: 'js/[name].[contenthash:8].js',
+          filename: production ? 'Concrete-Grinding/js/[name].[contenthash:8].js' : 'js/[name].[contenthash:8].js',
         },
         css: {
           // output filename of extracted CSS file from source style
-          filename: 'css/[name].[contenthash:8].css',
+          filename: production ? 'Concrete-Grinding/css/[name].[contenthash:8].css' : 'css/[name].[contenthash:8].css',
         },
       }),
       new CleanWebpackPlugin(),
@@ -130,7 +130,7 @@ export default (env: EnvironmentOptions): Configuration => {
           type: 'asset/resource',
           generator: {
             // output filename of images
-            filename: 'assets/img/[name].[hash:8][ext]',
+            filename: production ? 'Concrete-Grinding/assets/img/[name].[hash:8][ext]' : 'assets/img/[name].[hash:8][ext]',
           },
         },
       ],
