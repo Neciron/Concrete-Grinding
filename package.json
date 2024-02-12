@@ -7,9 +7,9 @@
     "node": ">=20.0.0"
   },
   "scripts": {
-    "dev": "webpack --mode=development",
+    "dev": "webpack --env development",
     "serve": "webpack serve",
-    "prod": "webpack --mode=production --progress"
+    "prod": "webpack --env production --progress"
   },
   "keywords": [],
   "author": "",
