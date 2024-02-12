@@ -47,10 +47,10 @@ export default (env: EnvironmentOptions): Configuration => {
       'admin/feedbacks/index': './src/pages/AdminFeedbacksPage/AdminFeedbacksPage.pug',
       'admin/users/index': './src/pages/AdminUsersPage/AdminUsersPage.pug',
     },
-    devtool: 'inline-source-map',
+    devtool: production ? false : 'inline-source-map',
     output: {
       path: path.resolve(__dirname, 'dist'),
-      publicPath: '/',
+      publicPath: production ? '/Concrete-Grinding/' : '/',
     },
     devServer: devServer ? devServerConfig : undefined,
     resolve: {
@@ -66,11 +66,11 @@ export default (env: EnvironmentOptions): Configuration => {
         pretty: true,
         js: {
           // output filename of extracted JS file from source script
-          filename: production ? 'Concrete-Grinding/js/[name].[contenthash:8].js' : 'js/[name].[contenthash:8].js',
+          filename: 'js/[name].[contenthash:8].js',
         },
         css: {
           // output filename of extracted CSS file from source style
-          filename: production ? 'Concrete-Grinding/css/[name].[contenthash:8].css' : 'css/[name].[contenthash:8].css',
+          filename: 'css/[name].[contenthash:8].css',
         },
       }),
       new CleanWebpackPlugin(),
@@ -130,7 +130,7 @@ export default (env: EnvironmentOptions): Configuration => {
           type: 'asset/resource',
           generator: {
             // output filename of images
-            filename: production ? 'Concrete-Grinding/assets/img/[name].[hash:8][ext]' : 'assets/img/[name].[hash:8][ext]',
+            filename: 'assets/img/[name].[hash:8][ext]',
           },
         },
       ],
