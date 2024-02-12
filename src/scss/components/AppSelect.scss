@@ -1,0 +1,44 @@
+.app-select {
+  &__label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--black);
+    margin-left: 14px;
+  }
+  &__select-wrapper {
+    position: relative;
+    & > i {
+      position: absolute;
+      top: calc(50% - 6px);
+      right: 16px;
+    }
+  }
+  &__select {
+    background-color: var(--white);
+    border: 1px solid var(--black);
+    border-radius: 8px;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    padding-left: 14px;
+    padding-right: 14px;
+    font-size: 16px;
+    line-height: normal;
+    width: 100%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-overflow: '';
+    &:focus,
+    &:active {
+      outline: none;
+      border: 1px solid var(--primary);
+    }
+  }
+  &__error {
+    display: block;
+    padding-top: 4px;
+    padding-left: 14px;
+    font-size: 14px;
+    min-height: 23px;
+    color: var(--error-color); 
+  }
+}

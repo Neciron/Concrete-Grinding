@@ -1,0 +1,40 @@
+@import "../components/AppSpinner.scss";
+@import "../components/AppHeader.scss";
+@import "../components/AppFooter.scss";
+@import "../components/AppInput.scss";
+@import "../components/AppButton.scss";
+@import "../components/Toast.scss";
+@import "../components/AdminMenu.scss";
+@import "../components/ContentEditForm.scss";
+
+.admin-content-page {
+  flex-shrink: 0;
+  flex-grow: 2;
+  display: flex;
+  align-items: flex-start;
+  &__content {
+    flex-grow: 2;
+    height: 100%;
+    overflow: auto;
+  }
+  &__title {
+    text-align: center;
+    margin-top: 32px;
+    margin-bottom: 32px;
+  }
+  &__list {
+    padding: 0 20px;
+  }
+  &__button-add-wrapper {
+    padding: 0 20px;
+    margin-bottom: 16px;
+    text-align: right;
+    & > button {
+      padding: 8px 16px;
+      & > i {
+        margin-right: 10px;
+      }
+      width: auto;
+    }
+  }
+}

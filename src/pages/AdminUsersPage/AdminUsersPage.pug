@@ -1,0 +1,15 @@
+doctype html
+html(lang="en")
+  head
+    include @/includes/CriticalHeadPart.pug
+    link(href=require('@/scss/pages/AdminUsersPage.scss') rel='stylesheet')
+    script(src=require('index.ts') defer)
+  body
+    include @/components/AppSpinner.pug
+    div(class="wrapper")
+      include @/components/AppHeader.pug
+      main(class="admin-users-page")
+        include @/components/AdminMenu.pug
+        div(class="admin-users-page__content")
+          h1(data-tr-text="app_menu_users" class="admin-users-page__title")
+      include @/components/AppFooter.pug

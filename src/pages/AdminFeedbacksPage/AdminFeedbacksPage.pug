@@ -1,0 +1,15 @@
+doctype html
+html(lang="en")
+  head
+    include @/includes/CriticalHeadPart.pug
+    link(href=require('@/scss/pages/AdminFeedbacksPage.scss') rel='stylesheet')
+    script(src=require('index.ts') defer)
+  body
+    include @/components/AppSpinner.pug
+    div(class="wrapper")
+      include @/components/AppHeader.pug
+      main(class="admin-feedbacks-page")
+        include @/components/AdminMenu.pug
+        div(class="admin-feedbacks-page__content")
+          h1(data-tr-text="app_menu_feedbacks" class="admin-feedbacks-page__title")
+      include @/components/AppFooter.pug

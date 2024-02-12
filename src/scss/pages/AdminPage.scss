@@ -1,0 +1,14 @@
+@import "../components/AppSpinner.scss";
+@import "../components/AppHeader.scss";
+@import "../components/AppFooter.scss";
+@import "../components/AppButton.scss";
+@import "../components/SignInForm.scss";
+@import "../components/AppInput.scss";
+@import "../components/Toast.scss";
+
+.admin-page {
+  flex-grow: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

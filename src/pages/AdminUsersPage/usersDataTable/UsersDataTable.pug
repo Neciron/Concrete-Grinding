@@ -1,0 +1,32 @@
+table(id="users-table" class="data-table")
+  thead
+    tr(class="data-table__head-row")
+      each header in tableHeaders
+        if header.key === "actions"
+          th(class="data-table__head-col" scope="col")
+            button(
+              data-action="add"
+              class="app-button app-button_light"
+              type="button"
+            )
+              i(class="fa-solid fa-plus")
+              span= header.title
+        else
+          th(class="data-table__head-col" scope="col")= header.title
+  tbody
+    each row in tableRows
+      tr(class="data-table__body-row")
+        td(class="data-table__body-col" data-title=row.id.dataTitle)= row.id.value
+        td(class="data-table__body-col" data-title=row.firstName.dataTitle)= row.firstName.value
+        td(class="data-table__body-col" data-title=row.lastName.dataTitle)= row.lastName.value
+        td(class="data-table__body-col" data-title=row.role.dataTitle)= row.role.value
+        td(class="data-table__body-col data-table__body-col_actions")
+          each action in row.actions
+            button(
+              data-action=action.value
+              data-user-id=row.id.value
+              type="button"
+              class="data-table__action-button"
+              title=action.dataTitle
+            )
+              i(class=action.icon)

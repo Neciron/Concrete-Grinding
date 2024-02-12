@@ -1,0 +1,15 @@
+{
+  "recommendations": [
+    "streetsidesoftware.code-spell-checker",
+    "mikestead.dotenv",
+    "dbaeumer.vscode-eslint",
+    "donjayamanne.githistory",
+    "wix.vscode-import-cost",
+    "syler.sass-indented",
+    "tyriar.sort-lines",
+    "amatiasq.sort-imports",
+    "simonsiefke.svg-preview",
+    "gruntfuggly.todo-tree",
+    "streetsidesoftware.code-spell-checker-ukrainian"
+  ]
+}

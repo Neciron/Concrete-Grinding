@@ -1,0 +1,44 @@
+{
+  "name": "landing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "dev": "webpack --mode=development",
+    "serve": "webpack serve",
+    "prod": "webpack --mode=production --progress"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.11.10",
+    "@types/pug": "^2.0.10",
+    "@types/uuid": "^9.0.8",
+    "@types/webpack": "^5.28.5",
+    "@typescript-eslint/eslint-plugin": "^6.20.0",
+    "@typescript-eslint/parser": "^6.20.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.9.1",
+    "eslint": "^8.52.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "fecha": "^4.2.3",
+    "firebase": "^10.7.2",
+    "pug": "^3.0.2",
+    "pug-plugin": "^4.9.9",
+    "sass": "^1.70.0",
+    "sass-loader": "^14.0.0",
+    "ts-loader": "^9.5.1",
+    "ts-node": "^10.9.2",
+    "tslib": "^2.6.2",
+    "typescript": "^5.3.3",
+    "uuid": "^9.0.1",
+    "webpack": "^5.90.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  }
+}
