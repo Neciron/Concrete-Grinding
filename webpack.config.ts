@@ -47,10 +47,10 @@ export default (env: EnvironmentOptions): Configuration => {
       'admin/feedbacks/index': './src/pages/AdminFeedbacksPage/AdminFeedbacksPage.pug',
       'admin/users/index': './src/pages/AdminUsersPage/AdminUsersPage.pug',
     },
-    devtool: 'inline-source-map',
+    devtool: production ? false : 'inline-source-map',
     output: {
       path: path.resolve(__dirname, 'dist'),
-      publicPath: '/',
+      publicPath: production ? '/Concrete-Grinding/' : '/',
     },
     devServer: devServer ? devServerConfig : undefined,
     resolve: {
