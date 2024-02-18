@@ -3,7 +3,13 @@ import { apiFeedbacks } from '@/api';
 import { asDateTime } from '@/utils';
 import type { Feedback } from '@/types';
 import getFeedbacksDataTable from './FeedbacksDataTable.pug';
+import { onActionAdd } from '../PopupFeedback';
+import { onActionEdit } from '../PopupFeedback';
+import { RouteName } from '@/types';
+import { Routes } from '@/router';
 import { show } from '@/utils';
+import { toast } from '@/components/toast';
+import { TranslateManager } from '@/classes/TranslateManager';
 
 enum TableColumn {
   Id = 'id',
@@ -141,31 +147,35 @@ const onTableClick = (event: Event): void => {
   const action = target.getAttribute('data-action') ?? target.parentElement?.getAttribute('data-action');
   const feedbackId = target.getAttribute('data-feedback-id') ?? target.parentElement?.getAttribute('data-feedback-id');
   if (action === Action.Add) {
-    // onActionAdd().then((result) => {
-    //   // eslint-disable-next-line @typescript-eslint/no-use-before-define
-    //   saveUser(result, true).then(() => {
-    //     toast.success('Відгук додано');
-    //   }).catch(() => {
-    //     show.error('Помилка при оновлені відгуку');
-    //   });
-    // }).catch(() => {
-    //   show.error('Помилка при відкритті попапу');
-    // });
-    console.log('add');
+    onActionAdd().then((result) => {
+      if (!result) {
+        return;
+      }
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      saveFeedback(result).then(() => {
+        toast.success('Відгук додано');
+      }).catch(() => {
+        show.error('Помилка при оновлені відгуку');
+      });
+    }).catch(() => {
+      show.error('Помилка при відкритті попапу');
+    });
   }
   if (action === Action.Edit && feedbackId) {
     console.log('edit');
-
-    // onActionEdit(userId).then((result) => {
-    //   // eslint-disable-next-line @typescript-eslint/no-use-before-define
-    //   saveUser(result, false).then(() => {
-    //     toast.success('Зміни збережено');
-    //   }).catch(() => {
-    //     show.error('Помилка при оновлені відгуку');
-    //   });
-    // }).catch(() => {
-    //   show.error('Помилка при відкритті попапу');
-    // });
+    onActionEdit(feedbackId).then((result) => {
+      if (!result) {
+        return;
+      }
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      saveFeedback(result).then(() => {
+        toast.success('Відгук додано');
+      }).catch(() => {
+        show.error('Помилка при оновлені відгуку');
+      });
+    }).catch(() => {
+      show.error('Помилка при відкритті попапу');
+    });
   }
 };
 
@@ -178,30 +188,30 @@ export const addTableActionsHandlers = (): void => {
   table.addEventListener('click', onTableClick);
 };
 
-// // eslint-disable-next-line func-style
-// async function saveFeedback(user: UserInternal|null, isNewUser: boolean): Promise<void> {
-//   if (!user) {
-//     return;
-//   }
-//   const userSaved = await apiUserInternal.saveUserInternal(user, isNewUser).catch(() => {
-//     show.error('Помилка при оновлені відгуку');
-//     return null;
-//   });
-//   if (!userSaved) {
-//     show.error('Помилка при оновлені відгуку');
-//     return;
-//   }
-//   const table = document.getElementById('users-table');
-//   if (!table) {
-//     show.error('Контейнер для таблиці відгуків не знайдено');
-//     return;
-//   }
-//   table.remove();
-//   await addUsersTable().catch(() => {
-//     show.error($t('app_application_error'));
-//   });
-//   addUsersTableActionsHandlers();
-//   const translateManager = new TranslateManager({ translations: {}, route: Routes[RouteName.AdminUsers] });
-//   await translateManager.init();
-//   translateManager.translatePage();
-// }
+// eslint-disable-next-line func-style
+async function saveFeedback(feedback: Feedback|null): Promise<void> {
+  if (!feedback) {
+    return;
+  }
+  const feedbackSaved = await apiFeedbacks.saveFeedback(feedback).catch(() => {
+    show.error('Помилка при оновлені відгуку');
+    return null;
+  });
+  if (!feedbackSaved) {
+    show.error('Помилка при оновлені відгуку');
+    return;
+  }
+  const table = document.getElementById('feedbacks-table');
+  if (!table) {
+    show.error('Контейнер для таблиці відгуків не знайдено');
+    return;
+  }
+  table.remove();
+  await addTable().catch(() => {
+    show.error($t('app_application_error'));
+  });
+  addTableActionsHandlers();
+  const translateManager = new TranslateManager({ translations: {}, route: Routes[RouteName.AdminFeedbacks] });
+  await translateManager.init();
+  translateManager.translatePage();
+}

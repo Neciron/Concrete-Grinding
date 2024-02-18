@@ -169,20 +169,43 @@ const onlyCyrillicOrDigits: ValidationRule = (values) => {
   return null;
 };
 
+const maxFileSize = (maxSize: number): ValidationFileRule => (values) => {
+  const value = values[0];
+  if (!value) {
+    return null;
+  }
+  if (value.size > maxSize) {
+    return $t('app_validation_error_file_too_large');
+  }
+  return null;
+};
+
+const fileType = (allowedTypes: string[]): ValidationFileRule => (values) => {
+  const value = values[0];
+  if (!value) {
+    return null;
+  }
+  if (!allowedTypes.includes(value.type)) {
+    return $t('app_validation_error_file_type');
+  }
+  return null;
+};
 
 export const validationRules = {
-  required,
-  maxLength,
-  noWhitespace,
-  noCyrillic,
   email,
+  fileType,
+  maxFileSize,
+  maxLength,
   minLength,
-  minOneSpecial,
-  minOneNumeric,
   minOneLowercase,
+  minOneNumeric,
+  minOneSpecial,
   minOneUppercase,
-  onlyLowerCaseAndUnderscore,
-  phone,
+  noCyrillic,
+  noWhitespace,
   onlyCyrillic,
   onlyCyrillicOrDigits,
+  onlyLowerCaseAndUnderscore,
+  phone,
+  required,
 };

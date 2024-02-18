@@ -1,4 +1,4 @@
-enum FeedbackRating {
+export enum FeedbackRating {
   ONE = 1,
   TWO = 2,
   THREE = 3,
@@ -14,7 +14,7 @@ export const getFeedbackRatingFromValue = (value: number | undefined): FeedbackR
   return isNumberFeedbackRating(value) ? value : undefined;
 };
 
-enum FeedbackStatus {
+export enum FeedbackStatus {
   PENDING = 'PENDING',
   APPROVED = 'APPROVED',
   REJECTED = 'REJECTED',
@@ -30,8 +30,6 @@ export const getFeedbackStatusFromValue = (value: string | undefined): FeedbackS
 };
 
 export interface FeedbackProps {
-  readonly afterGrindingPhotoUrl: string|null;
-  readonly beforeGrindingPhotoUrl: string|null;
   /** Example: 2024-02-11T10:00:36.984Z */
   readonly createdAt: Date;
   /** Example: John Doe */

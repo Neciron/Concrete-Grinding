@@ -1,0 +1,47 @@
+div(class="popup popup_hidden")
+  form(id="popup-form" class="popup__content popup__content_hidden")
+    h3(class="popup__heading")= popup.heading
+    div(class="d-flex align-center mb-8")
+      div(class="app-input mr-20")
+        label(class="app-input__label")= popup.customerLabel
+        input(
+          autocomplete="off"
+          class="app-input__input"
+          placeholder=popup.customerPlaceholder
+          value=feedback.customer
+          name="customer"
+          type="text"
+        )
+        span(class="app-input__error")
+      div(class="app-select w-50")
+        label(class="app-select__label")= popup.ratingLabel
+        div(class="app-select__select-wrapper")
+          i(class="fa-solid fa-chevron-down")
+          select(class="app-select__select" name="rating")
+            option(value="" selected=feedback.rating === null) --
+            each rating in ratings
+              option(value=rating.value selected=rating.value === feedback.rating)= rating.text
+        span(class="app-select__error")
+    div(class="d-flex mb-16")
+      div(class="app-select mr-20 w-50")
+        label(class="app-select__label")= popup.statusLabel
+        div(class="app-select__select-wrapper")
+          i(class="fa-solid fa-chevron-down")
+          select(class="app-select__select" name="status")
+            option(value="" selected=feedback.status === null) --
+            each status in statuses
+              option(value=status.value selected=status.value === feedback.status)= status.text
+        span(class="app-select__error")
+      div(class="app-input")
+        label(class="app-input__label")= popup.feedbackLabel
+        textarea(
+          rows="10"
+          autocomplete="off"
+          class="app-input__input"
+          placeholder=popup.feedbackPlaceholder
+          name="text"
+          type="text"
+        )= feedback.text
+        span(class="app-input__error")
+    button(class="app-button mb-8" type="submit")= popup.saveButtonText
+    button(id="popup-button-cancel" class="app-button app-button_danger" type="button")= popup.cancelButtonText

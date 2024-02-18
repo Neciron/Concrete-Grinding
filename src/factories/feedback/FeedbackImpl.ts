@@ -2,8 +2,6 @@ import type { Feedback } from '@/types';
 import type { FeedbackProps } from '@/types';
 
 export class FeedbackImpl implements Feedback {
-  public readonly afterGrindingPhotoUrl;
-  public readonly beforeGrindingPhotoUrl;
   public readonly createdAt;
   public readonly customer;
   public readonly id;
@@ -14,8 +12,6 @@ export class FeedbackImpl implements Feedback {
   public readonly updatedByUserId;
 
   public constructor(props: FeedbackProps) {
-    this.afterGrindingPhotoUrl = props.afterGrindingPhotoUrl;
-    this.beforeGrindingPhotoUrl = props.beforeGrindingPhotoUrl;
     this.createdAt = props.createdAt;
     this.customer = props.customer;
     this.id = props.id;

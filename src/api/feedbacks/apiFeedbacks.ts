@@ -1,3 +1,4 @@
+import { apiUserFirebase } from '../userFirebase/apiUserFirebase';
 import { child } from '@firebase/database';
 import type { Feedback } from '@/types';
 import { feedbackFactory } from '@/factories/feedback/feedbackFactory';
@@ -16,8 +17,6 @@ import { v4 as uuidv4 } from 'uuid';
 const TABLE_NAME = 'feedbacks';
 
 interface FeedbackDtoGet {
-  readonly after_grinding_photo_url: string|null;
-  readonly before_grinding_photo_url: string|null;
   /** Example: 2024-02-11T10:00:36.984Z */
   readonly created_at: string;
   /** Example: John Doe */
@@ -50,8 +49,6 @@ const dtoGetToFeedback = (dto: FeedbackDtoGet): Feedback => {
   }
   const updatedAt = fromDateTimeString(dto.updated_at);
   return feedbackFactory({
-    afterGrindingPhotoUrl: dto.after_grinding_photo_url,
-    beforeGrindingPhotoUrl: dto.before_grinding_photo_url,
     createdAt,
     customer: dto.customer,
     id: dto.id,
@@ -61,6 +58,20 @@ const dtoGetToFeedback = (dto: FeedbackDtoGet): Feedback => {
     updatedAt,
     updatedByUserId: dto.updated_by_user_id,
   });
+};
+
+const getFeedbackById = async (id: string): Promise<Feedback|null> => {
+  const dbRef = ref(getDatabase());
+  const snapshot = await get(child(dbRef, `${TABLE_NAME}/${id}`)).catch((error: FirebaseError) => {
+    toast.error(`${error.code}: ${error.message}`);
+    console.error(error);
+  });
+  if (!snapshot || !snapshot.exists()) {
+    console.error('Feedback not found', id);
+    return null;
+  }
+  const dto = snapshot.val() as FeedbackDtoGet;
+  return dtoGetToFeedback(dto);
 };
 
 const getFeedbacks = async (): Promise<readonly Feedback[]> => {
@@ -87,17 +98,16 @@ const updateFeedback = async (feedback: Feedback): Promise<Feedback|null> => {
     console.error('Feedback not found', feedback.id);
     return null;
   }
+  const user = await apiUserFirebase.getUser();
   const result = await set(child(dbRef, `${TABLE_NAME}/${feedback.id}`), {
-    after_grinding_photo_url: feedback.afterGrindingPhotoUrl,
-    before_grinding_photo_url: feedback.beforeGrindingPhotoUrl,
     created_at: feedback.createdAt.toISOString(),
     customer: feedback.customer,
     id: feedback.id,
     rating: feedback.rating,
     status: feedback.status,
     text: feedback.text,
-    updated_at: feedback.updatedAt?.toISOString() ?? null,
-    updated_by_user_id: feedback.updatedByUserId ?? null,
+    updated_at: new Date().toISOString(),
+    updated_by_user_id: user?.uid ?? null,
   }).catch((error: FirebaseError) => {
     show.error(`Помилка збереження відгуку! ${error.code}: ${error.message}`);
     console.error();
@@ -107,15 +117,13 @@ const updateFeedback = async (feedback: Feedback): Promise<Feedback|null> => {
     console.error('Feedback not saved', feedback.id);
     return null;
   }
-  return feedback;
+  return getFeedbackById(feedback.id);
 };
 
 const createFeedback = async (feedback: Feedback): Promise<Feedback|null> => {
   const dbRef = ref(getDatabase());
   const id = uuidv4();
   const result = await set(child(dbRef, `${TABLE_NAME}/${id}`), {
-    after_grinding_photo_url: feedback.afterGrindingPhotoUrl,
-    before_grinding_photo_url: feedback.beforeGrindingPhotoUrl,
     created_at: feedback.createdAt.toISOString(),
     customer: feedback.customer,
     id,
@@ -133,7 +141,7 @@ const createFeedback = async (feedback: Feedback): Promise<Feedback|null> => {
     console.error('Feedback not saved', feedback.id);
     return null;
   }
-  return feedback;
+  return getFeedbackById(id);
 };
 
 const saveFeedback = async (feedback: Feedback): Promise<Feedback|null> => {
@@ -147,4 +155,5 @@ const saveFeedback = async (feedback: Feedback): Promise<Feedback|null> => {
 export const apiFeedbacks = {
   getFeedbacks,
   saveFeedback,
+  getFeedbackById,
 };
