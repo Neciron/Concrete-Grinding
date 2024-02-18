@@ -1,18 +1,9 @@
 doctype html
 html(lang="en")
   head
-    meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    title AdminPage
     include @/includes/CriticalHeadPart.pug
-    link(href=require('@/scss/components/AppSpinner.scss') rel='stylesheet')
-    link(href=require('@/scss/components/AppHeader.scss') rel='stylesheet')
-    link(href=require('@/scss/components/AppFooter.scss') rel='stylesheet')
-    link(href=require('@/scss/components/AppButton.scss') rel='stylesheet')
-    link(href=require('@/scss/components/SignInForm.scss') rel='stylesheet')
-    link(href=require('@/scss/components/AppInput.scss') rel='stylesheet')
     link(href=require('@/scss/pages/AdminPage.scss') rel='stylesheet')
-    script(src=require('index.ts') defer='defer')
+    script(src=require('index.ts') defer)
   body
     include @/components/AppSpinner.pug
     div(class="wrapper")
@@ -21,4 +12,3 @@ html(lang="en")
         include @/components/SignInForm.pug
       include @/components/AppFooter.pug
 
-    

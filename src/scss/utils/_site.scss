@@ -36,10 +36,20 @@ a {
   text-decoration: none;
 }
 
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 .wrapper {
   display: flex;
   flex-direction: column;
   height: 100%;
+}
+
+.mb-8 {
+  margin-bottom: 8px;
 }
 
 .mb-16 {
@@ -48,4 +58,28 @@ a {
 
 .mb-45 {
   margin-bottom: 45px;
+}
+
+.mr-20 {
+  margin-right: 20px;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.w-50 {
+  width: 50%;
 }

@@ -16,9 +16,13 @@ const devServerConfig: DevServerConfiguration = {
   static: {
     directory: path.join(__dirname, 'dist'),
   },
+  host: 'localhost',
   compress: true,
   open: false,
-  liveReload: false,
+  liveReload: true,
+  client: {
+    overlay: false,
+  },
   watchFiles: {
     paths: ['src/**/*.*'],
     options: {
@@ -36,16 +40,17 @@ export default (env: EnvironmentOptions): Configuration => {
     entry: {
       'index': './src/pages/HomePage/HomePage.pug',
       'about/index': './src/pages/AboutPage/AboutPage.pug',
-      'reviews/index': './src/pages/ReviewsPage/ReviewsPage.pug',
+      'feedbacks/index': './src/pages/FeedbacksPage/FeedbacksPage.pug',
       'admin/applications/index': './src/pages/AdminApplicationsPage/AdminApplicationsPage.pug',
       'admin/content/index': './src/pages/AdminContentPage/AdminContentPage.pug',
       'admin/index': './src/pages/AdminPage/AdminPage.pug',
-      'admin/reviews/index': './src/pages/AdminReviewsPage/AdminReviewsPage.pug',
+      'admin/feedbacks/index': './src/pages/AdminFeedbacksPage/AdminFeedbacksPage.pug',
       'admin/users/index': './src/pages/AdminUsersPage/AdminUsersPage.pug',
     },
+    devtool: production ? false : 'inline-source-map',
     output: {
       path: path.resolve(__dirname, 'dist'),
-      publicPath: '/',
+      publicPath: production ? '/Concrete-Grinding/' : '/',
     },
     devServer: devServer ? devServerConfig : undefined,
     resolve: {
@@ -70,6 +75,7 @@ export default (env: EnvironmentOptions): Configuration => {
       }),
       new CleanWebpackPlugin(),
     ],
+    externals: ['firebase'],
     module: {
       rules: [
         {
@@ -87,7 +93,25 @@ export default (env: EnvironmentOptions): Configuration => {
         {
           test: /\.pug$/,
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access
-          loader: PugPlugin.loader, 
+          oneOf: [
+            // import Pug in JavaScript/TypeScript as template function
+            {
+              // match scripts where Pug is used
+              issuer: /\.(js|ts)$/,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+              loader: PugPlugin.loader,
+              options: {
+                // compile Pug into template function
+                method: 'compile',
+              },
+            },
+            // render Pug from Webpack entry into static HTML
+            {
+              // default method is 'render'
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+              loader: PugPlugin.loader,
+            },
+          ],
         },
         // sass-loader
         {

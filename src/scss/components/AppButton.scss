@@ -1,4 +1,45 @@
 .app-button {
   width: 100%;
-  // background-color: var(--);
+  background-color: var(--primary);
+  border: 0;
+  color: var(--white);
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 8px;
+  & > i {
+    margin-right: 8px;
+  }
+  &:hover {
+    background-color: var(--primary-dark);
+    cursor: pointer;
+  }
+  &:disabled {
+    background-color: var(--primary-light);
+    color: var(--white);
+    cursor: not-allowed;
+  }
+  &_light {
+    background-color: var(--white);
+    color: var(--primary);
+    &:hover {
+      background-color: var(--dark-white);
+      color: var(--primary-dark);
+    }
+    &:disabled {
+      background-color: var(--dark-white);
+      color: var(--primary-light);
+    }
+  }
+  &_danger {
+    background-color: var(--danger);
+    &:hover {
+      background-color: var(--danger-dark);
+    }
+    &:disabled {
+      background-color: var(--danger-light);
+    }
+  }
 }

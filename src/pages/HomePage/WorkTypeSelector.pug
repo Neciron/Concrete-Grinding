@@ -1,0 +1,6 @@
+div(class="app-select mb-16")
+  label(class="app-select__label")= workTypeLabelText
+  select(class="app-select__select" name="work-type-select")
+    each workTypeItem in workTypes
+      option(value=workTypeItem.value selected=workTypeItem.selected === true)= workTypeItem.optionText
+  span(class="app-select__error")

@@ -1,0 +1,47 @@
+div(class="popup popup_hidden")
+  form(id="popup-form" class="popup__content popup__content_hidden")
+    h3(class="popup__heading")= heading
+    div(class="app-input mb-8")
+      label(class="app-input__label")= userIdLabelText
+      input(
+        autocomplete="off"
+        class="app-input__input"
+        placeholder=userIdInputPlaceholder
+        value=user.id
+        name="user-id"
+        type="text"
+      )
+      span(class="app-input__error")
+    div(class="app-input mb-8")
+      label(class="app-input__label")= firstNameLabelText
+      input(
+        autocomplete="off"
+        class="app-input__input"
+        placeholder=firstNameInputPlaceholder
+        value=user.firstName
+        name="first-name"
+        type="text"
+      )
+      span(class="app-input__error")
+    div(class="app-input mb-8")
+      label(class="app-input__label")= lastNameLabelText
+      input(
+        autocomplete="off"
+        class="app-input__input"
+        placeholder=lastNameInputPlaceholder
+        value=user.lastName
+        name="last-name"
+        type="text"
+      )
+      span(class="app-input__error")
+    div(class="app-select mb-16")
+      label(class="app-select__label")= roleLabelText
+      div(class="app-select__select-wrapper")
+        i(class="fa-solid fa-chevron-down")
+        select(class="app-select__select" name="user-role")
+          option(value="" selected=user.role === '') --
+          each role in roles
+            option(value=role.value selected=role.value === user.role)= role.optionText
+      span(class="app-select__error")
+    button(class="app-button mb-8" type="submit")= buttonSaveText
+    button(id="popup-button-cancel" class="app-button app-button_danger" type="button")= buttonCancelText

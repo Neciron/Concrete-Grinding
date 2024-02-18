@@ -1,0 +1,66 @@
+.data-table {
+  table-layout: auto;
+  border-collapse: collapse;
+  width: 100%;
+  // head part
+  &__head-row {
+    background-color: var(--primary);
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
+  }
+  &__head-col {
+    color: var(--white);
+    line-height: 18px;
+    padding: 9px 12px;
+    text-align: left;
+  }
+  // body part
+  &__body-row {
+    background-color: var(--data-table-body-bg-color);
+    border-top: 3px solid var(--white);
+    @media screen and (max-width: 768px) {
+      display: block;
+      margin-bottom: 15px;
+    }
+  }
+  &__body-col {
+    padding: 9px 12px;
+    @media screen and (max-width: 768px) {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--data-table-col-border-color);
+      text-align: right;
+      &::before {
+        content: attr(data-title);
+        text-align: left;
+        font-weight: 700;
+      }
+    }
+    &_actions {
+      text-align: right;
+      & > button {
+        margin-right: 16px;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+      @media screen and (max-width: 768px) {
+        justify-content: center;
+        font-size: 24px;
+        &::before {
+          content: none;
+        }
+      }
+    }
+  }
+  &__action-button {
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

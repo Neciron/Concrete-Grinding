@@ -17,7 +17,15 @@
     &:focus,
     &:active {
       outline: none;
-      border: 1px solid var(--input-focus-color);
+      border: 1px solid var(--primary);
     }
+  }
+  &__error {
+    display: block;
+    padding-top: 4px;
+    padding-left: 14px;
+    font-size: 14px;
+    min-height: 23px;
+    color: var(--error-color); 
   }
 }

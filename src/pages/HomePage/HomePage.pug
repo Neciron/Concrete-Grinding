@@ -4,5 +4,74 @@ html(lang="en")
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title Home page
+    script(src=require('index.ts') defer)
   body 
     h1 Home page
+    //- form(id="application-form")
+    //-   label(for="application__name") Прізвище та ім'я
+    //-   input(type="text", id="application__name", name="name__application", placeholder="Петренко Микола")
+    //-   br
+    //-   label(for="application__phone") Номер телефону
+    //-   input(type="text", id="application__phone", name="phone__application", placeholder="0979165321")
+    //-   br
+    //-   label(for="application__location") Локація
+    //-   input(type="text", id="application__location", name="location__application", placeholder="Івано-Франківськ")
+    //-   br
+    //-   label(for="application__jobType") Тип роботи
+    //-   input(type="text", id="application__jobType", name="jobType__application", placeholder="Шліфування стелі")
+    //-   br
+    //-   button(type="submit" id="application__button-id") Відправити
+    form(id="application-form" class="application-form")
+      h1(data-tr-text="app_home_page_application" class="application-form__title")
+      div(class="app-input mb-16")
+        label(data-tr-text="app_name" class="app-input__label")
+        input(
+          autocomplete="name"
+          class="app-input__input"
+          data-tr-placeholder="app_enter_name"
+          inputmode="name"
+          name="name-input"
+          type="text"
+        )
+        span(class="app-input__error")
+      div(class="app-input mb-16")
+        label(data-tr-text="app_phone" class="app-input__label")
+        input(
+          autocomplete="phone"
+          class="app-input__input"
+          data-tr-placeholder="app_enter_phone"
+          inputmode="phone"
+          name="phone-input"
+          type="text"
+        )
+        span(class="app-input__error")
+      div(class="app-input mb-16")
+        label(data-tr-text="app_location" class="app-input__label")
+        input(
+          autocomplete="location"
+          class="app-input__input"
+          data-tr-placeholder="app_enter_location"
+          inputmode="location"
+          name="location-input"
+          type="text"
+        )
+        span(class="app-input__error")
+      div(class="app-input mb-16")
+        label(data-tr-text="app_work_type" class="app-input__label")
+        input(
+          autocomplete="work-type"
+          class="app-input__input"
+          data-tr-placeholder="app_enter_work_type"
+          inputmode="work-type"
+          name="work-type-input"
+          type="text"
+        )
+        span(class="app-input__error")
+      button(
+        class="app-button"
+        data-tr-text="app_action_confirm"
+        type="submit"
+      )
+      div(id="selector")
+      
+    

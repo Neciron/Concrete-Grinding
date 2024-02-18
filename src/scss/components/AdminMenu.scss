@@ -1,0 +1,62 @@
+.admin-menu {
+  height: 100%;
+  width: 250px;
+  transition: all 0.3s ease-in-out;
+  border-right: 1px solid var(--black);
+  @media screen and (max-width: 768px) {
+    width: 53px;
+  }
+  &__heading {
+    word-break: break-all;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 400;
+    background-color: var(--admin-menu-heading-bg);
+    border-bottom: 1px solid var(--black);
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
+  }
+  &__item {
+    display: block;
+    padding: 16px;
+    @media screen and (max-width: 768px) {
+      & > span {
+        display: none;
+      }
+    }
+    &_button {
+      background-color: transparent;
+      border: 0;
+      width: 100%;
+      text-align: left;
+      @media screen and (max-width: 768px) {
+        & > span {
+          display: none;
+        }
+      }
+      &:hover {
+        cursor: pointer;
+        background-color: var(--admin-menu-hover-bg);
+      }
+    }
+    &:hover {
+      cursor: pointer;
+      background-color: var(--admin-menu-hover-bg);
+    }
+    &_active {
+      font-weight: 700;
+      background-color: var(--admin-menu-hover-bg);
+      &:hover {
+        cursor: not-allowed;
+        background-color: var(--admin-menu-hover-bg);
+      }
+    }
+  }
+  &__item-icon {
+    margin-right: 16px;
+    @media screen and (max-width: 768px) {
+      margin-right: 0;
+    }
+  }
+}

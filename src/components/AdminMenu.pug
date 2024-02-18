@@ -1,0 +1,24 @@
+aside(id="admin-menu" class="admin-menu") 
+  h2(id="admin-menu-heading" class="admin-menu__heading") User Menu
+  nav
+    ul
+      li
+        a(href="/admin/feedbacks" class="admin-menu__item")
+          i(class="admin-menu__item-icon fa-solid fa-comment")
+          span(data-tr-text="app_menu_feedbacks")
+      li
+        a(href="/admin/users" class="admin-menu__item")
+          i(class="admin-menu__item-icon fa-solid fa-user-group")
+          span(data-tr-text="app_menu_users")
+      li
+        a(href="/admin/applications" class="admin-menu__item")
+          i(class="admin-menu__item-icon fa-solid fa-file-import")
+          span(data-tr-text="app_menu_applications")
+      li
+        a(href="/admin/content" class="admin-menu__item")
+          i(class="admin-menu__item-icon fa-solid fa-book")
+          span(data-tr-text="app_menu_content")
+      li
+        button(id="sign-out-button" class="admin-menu__item admin-menu__item_button")
+          i(class="admin-menu__item-icon fa-solid fa-sign-out")
+          span(data-tr-text="app_action_sign_out")
